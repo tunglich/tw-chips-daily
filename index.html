@@ -36,6 +36,9 @@ nav { margin-left:auto; display:flex; gap:2px; flex-wrap:wrap; }
 nav a { color:var(--muted); text-decoration:none; font-size:.8rem;
   padding:4px 10px; border-radius:99px; }
 nav a:hover, nav a:focus-visible { background:var(--infobg); color:var(--info); outline:none; }
+nav a.etf-link { background:var(--infobg); color:var(--info); border-radius:99px;
+  padding:3px 12px; font-weight:700; }
+nav a.etf-link:hover, nav a.etf-link:focus-visible { filter:brightness(1.1); }
 main { max-width:1240px; margin:0 auto; padding:18px 16px; }
 .sub { color:var(--muted); font-size:.78rem; margin:2px 0 14px; }
 .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -108,10 +111,11 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
     <a href="#overview">總覽</a><a href="#streaks">連續動向</a>
     <a href="#matrix">投信矩陣</a><a href="#dealer">自營商</a>
     <a href="#watch">觀察名單</a>
+    <a class="etf-link" href="https://tunglich.github.io/tw-chips-daily/etf.html">ETF 買賣</a>
   </nav>
 </header>
 <main>
-<p class="sub">投信主動基金歸屬(已扣 ETF)· 產生於 2026-08-13 17:39 · 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
+<p class="sub">投信主動基金歸屬(已扣 ETF)· 產生於 2026-08-13 18:10 · 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
 <div class="kpis"><div class="kpi buy"><div class="kpi-label">主動買超金額</div><div class="kpi-val">91.6</div><div class="kpi-sub">億元</div></div><div class="kpi sell"><div class="kpi-label">主動賣超金額</div><div class="kpi-val">95.2</div><div class="kpi-sub">億元</div></div><div class="kpi "><div class="kpi-label">投信連買 ≥2日</div><div class="kpi-val">35</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="kpi-label">其中連 3 日</div><div class="kpi-val">18</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="kpi-label">觀察名單</div><div class="kpi-val">13</div><div class="kpi-sub">4 檔仍在買</div></div><div class="kpi "><div class="kpi-label">自營高信心歸屬</div><div class="kpi-val">6</div><div class="kpi-sub">檔</div></div></div>
 
 <section id="overview"><h2>總覽 — 主動金額 Top 8</h2>
