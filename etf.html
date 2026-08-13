@@ -62,18 +62,34 @@ h2 { font-size:1rem; color:var(--ink); margin:0 0 10px;
   border-radius:10px; padding:14px 16px; margin-bottom:12px; }
 .note { color:var(--muted); font-size:.75rem; margin:0 0 8px; }
 .muted { color:var(--muted); }
-.filters { display:grid; grid-template-columns:1fr 1fr auto; gap:10px;
+.card.filter-card {
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--infobg) 55%,var(--card)), var(--card) 70%);
+  border:1px solid color-mix(in srgb,var(--accent) 28%,var(--line));
+  box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 12%,transparent),
+             0 2px 5px rgba(0,0,0,.10);
+  padding:18px 20px; }
+.filters { display:grid; grid-template-columns:1fr 1fr auto; gap:12px;
   align-items:end; }
-.filters label { display:block; font-size:.72rem; color:var(--muted);
-  letter-spacing:.05em; margin-bottom:4px; }
-.filters select { width:100%; padding:7px 10px; border:1px solid var(--line);
-  border-radius:8px; font-size:.82rem; background:var(--card); color:var(--ink);
-  font-family:inherit; }
-.filters select:focus { outline:none; border-color:var(--accent); }
-.filters button { padding:7px 16px; border:1px solid var(--line); border-radius:99px;
-  background:var(--infobg); color:var(--info); font-size:.78rem; cursor:pointer;
-  font-family:inherit; font-weight:600; }
-.filters button:hover { filter:brightness(1.05); }
+.filters label { display:block; font-size:.74rem; font-weight:700; color:var(--accent);
+  letter-spacing:.08em; margin-bottom:5px; }
+.filters select { width:100%; padding:10px 12px;
+  border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));
+  border-radius:9px; font-size:.88rem; background:var(--card); color:var(--ink);
+  font-family:inherit; box-shadow:inset 0 1px 3px rgba(0,0,0,.08);
+  transition:box-shadow .15s, border-color .15s; }
+.filters select:hover { border-color:var(--accent); }
+.filters select:focus { outline:none; border-color:var(--accent);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.06),
+             0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent); }
+.filters button { padding:10px 20px; border:none; border-radius:99px;
+  background:var(--accent); color:#fff; font-size:.82rem; cursor:pointer;
+  font-family:inherit; font-weight:700; letter-spacing:.03em;
+  box-shadow:0 3px 8px color-mix(in srgb,var(--accent) 45%,transparent);
+  transition:transform .12s, box-shadow .12s, filter .12s; }
+.filters button:hover { filter:brightness(1.08); transform:translateY(-1px);
+  box-shadow:0 5px 12px color-mix(in srgb,var(--accent) 50%,transparent); }
+.filters button:active { transform:translateY(0); }
 @media (max-width: 700px) { .filters { grid-template-columns:1fr; } }
 .up { color:var(--buy); font-weight:600; }
 .down { color:var(--sell); font-weight:600; }
@@ -124,7 +140,7 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
   </nav>
 </header>
 <main>
-<p class="sub">全部國內成分股 ETF(主動+被動)持股與日增減 · 由 PCF 申購買回清單計算 · 產生於 2026-08-13 19:16</p>
+<p class="sub">全部國內成分股 ETF(主動+被動)持股與日增減 · 由 PCF 申購買回清單計算 · 產生於 2026-08-13 19:20</p>
 <div class="kpis">
   <div class="kpi"><div class="kpi-label">ETF 檔數</div>
     <div class="kpi-val" id="k-etf">87</div>
@@ -149,7 +165,7 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
 </section>
 
 <section id="filter"><h2>篩選</h2>
-<div class="card"><div class="filters">
+<div class="card filter-card"><div class="filters">
   <div><label for="etf-select">ETF</label>
     <select id="etf-select"><option value="">全部 ETF</option>
         <option value="00400A">00400A 主動國泰動能高息</option>
