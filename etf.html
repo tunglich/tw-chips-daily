@@ -140,7 +140,7 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
   </nav>
 </header>
 <main>
-<p class="sub">全部國內成分股 ETF(主動+被動)持股與日增減 · 由 PCF 申購買回清單計算 · 產生於 2026-08-13 19:20</p>
+<p class="sub">全部國內成分股 ETF(主動+被動)持股與日增減 · 由 PCF 申購買回清單計算 · 產生於 2026-08-13 19:54</p>
 <div class="kpis">
   <div class="kpi"><div class="kpi-label">ETF 檔數</div>
     <div class="kpi-val" id="k-etf">87</div>
@@ -856,7 +856,7 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
     </select></div>
   <div><button id="clear-btn" type="button">清除篩選</button></div>
 </div>
-<p class="note" style="margin:10px 0 0">選一檔股票可看「哪些 ETF 在買/賣它」;選一檔 ETF 可看它整包持股的當日增減。點表頭可排序。</p>
+<p class="note" style="margin:10px 0 0">選一檔股票可看「哪些 ETF 在買/賣它」;選一檔 ETF 可看它整包持股的當日增減。點表頭可排序;<strong>雙擊表格任一列 = 只看該檔 ETF 的全部持股</strong>。</p>
 </div></section>
 
 <section id="detail"><h2>持股明細</h2>
@@ -5426,6 +5426,17 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
   }
   etfSel.addEventListener("change", filterTable);
   stockSel.addEventListener("change", filterTable);
+
+  // 雙擊資料列 → 只看該檔 ETF 的全部持股
+  tbody.addEventListener("dblclick", function (ev) {
+    var tr = ev.target.closest("tr");
+    if (!tr || !tr.dataset.etf) return;
+    etfSel.value = tr.dataset.etf;
+    stockSel.value = "";
+    filterTable();
+    var sel = window.getSelection(); if (sel) sel.removeAllRanges();
+    document.getElementById("detail").scrollIntoView({behavior: "smooth"});
+  });
   document.getElementById("clear-btn").addEventListener("click", function () {
     etfSel.value = ""; stockSel.value = ""; filterTable();
   });
