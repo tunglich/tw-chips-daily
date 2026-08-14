@@ -148,6 +148,11 @@ th .arrow { font-size:.6rem; margin-left:2px; opacity:.7; }
 td { padding:5px 10px; border-bottom:1px solid var(--line); }
 td.num { text-align:right; }
 tbody tr:hover td { background:color-mix(in srgb,var(--accent) 7%,transparent); }
+td.sticky-col { position:sticky; z-index:2; background:var(--card); }
+th.sticky-col { position:sticky; z-index:4;
+  background:color-mix(in srgb,var(--infobg) 45%,var(--card)); }
+.sticky-col-last { box-shadow:4px 0 6px -3px rgba(0,0,0,.18); }
+tbody tr:hover td.sticky-col { background:color-mix(in srgb,var(--accent) 7%,var(--card)); }
 footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); font-size:.72rem; }
 </style>
 </head>
@@ -161,7 +166,7 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
   </nav>
 </header>
 <main>
-<p class="sub">全部國內成分股 ETF(主動+被動)持股與日增減 · 由 PCF 申購買回清單計算 · 產生於 2026-08-14 18:22</p>
+<p class="sub">全部國內成分股 ETF(主動+被動)持股與日增減 · 由 PCF 申購買回清單計算 · 產生於 2026-08-14 18:29</p>
 <div class="kpis">
   <div class="kpi"><div class="kpi-label">ETF 檔數</div>
     <div class="kpi-val" id="k-etf">110</div>
@@ -3157,7 +3162,7 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
 
 <section id="detail"><h2>持股明細</h2>
 <div class="card"><div class="tblwrap">
-<table id="data-table">
+<table id="data-table" data-sticky="4">
 <thead><tr>
   <th>ETF代號</th><th>ETF名稱</th><th>股票代號</th><th>股票名稱</th>
   <th class="num">張數</th><th class="num">金額(佰萬)</th><th class="num">權重(%)</th>
@@ -10364,6 +10369,32 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
   var stockSel = document.getElementById("stock-select");
   var tbody = document.querySelector("#data-table tbody");
 
+  function stickyCols() {
+    document.querySelectorAll("table[data-sticky]").forEach(function (tb) {
+      var n = parseInt(tb.dataset.sticky) || 0;
+      if (!n) return;
+      var first = tb.querySelector("tr");
+      if (!first) return;
+      var lefts = [], acc = 0;
+      for (var i = 0; i < n && i < first.children.length; i++) {
+        lefts.push(acc);
+        acc += first.children[i].getBoundingClientRect().width;
+      }
+      tb.querySelectorAll("tr").forEach(function (tr) {
+        for (var i = 0; i < n && i < tr.children.length; i++) {
+          var c = tr.children[i];
+          c.classList.add("sticky-col");
+          c.style.left = lefts[i] + "px";
+          c.classList.toggle("sticky-col-last", i === n - 1);
+        }
+      });
+    });
+  }
+  window.addEventListener("resize", function () {
+    clearTimeout(window.__stickyT);
+    window.__stickyT = setTimeout(stickyCols, 150);
+  });
+
   function filterTable() {
     var e = etfSel.value, s = stockSel.value;
     var etfs = {}, stocks = {}, net = 0, mv = 0;
@@ -10388,8 +10419,9 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
     document.getElementById("k-mv").textContent =
       (mv / 100).toLocaleString("en-US", {maximumFractionDigits: 0});
   }
-  etfSel.addEventListener("change", filterTable);
-  stockSel.addEventListener("change", filterTable);
+  etfSel.addEventListener("change", function () { filterTable(); stickyCols(); });
+  stockSel.addEventListener("change", function () { filterTable(); stickyCols(); });
+  stickyCols();
 
   // 雙擊資料列 → 只看該檔 ETF 的全部持股
   tbody.addEventListener("dblclick", function (ev) {
@@ -10398,11 +10430,12 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
     etfSel.value = tr.dataset.etf;
     stockSel.value = "";
     filterTable();
+    stickyCols();
     var sel = window.getSelection(); if (sel) sel.removeAllRanges();
     document.getElementById("detail").scrollIntoView({behavior: "smooth"});
   });
   document.getElementById("clear-btn").addEventListener("click", function () {
-    etfSel.value = ""; stockSel.value = ""; filterTable();
+    etfSel.value = ""; stockSel.value = ""; filterTable(); stickyCols();
   });
 
   function cellVal(td) {
