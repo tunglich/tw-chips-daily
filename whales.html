@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大戶趨勢 2026/08/14 · 台股籌碼日報</title>
+
+<style>
+:root {
+  --bg:#f3f5f4; --card:#ffffff; --ink:#18232b; --muted:#6a7781;
+  --line:#e3e8e6; --accent:#0f6e5c; --accent2:#12836e; --accentbg:#e4f3ee;
+  --lime:#e4f3ee; --limeink:#0f6e5c; --limebg:#e4f3ee;
+  --side:#ffffff; --sidew:232px; --topbarh:60px; --radius:14px;
+  --buy:#c2403a; --buybg:#faeceb; --sell:#20714f; --sellbg:#e8f2ed;
+  --good:#20714f; --goodbg:#e8f2ed; --warn:#8a5f00; --warnbg:#f7efdc;
+  --info:#0f6e5c; --infobg:#e4f3ee; --hitbg:#e2eef3; --hit:#0f4c60;
+  --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 18px rgba(16,24,40,.06);
+  --shadow-lg:0 4px 8px rgba(16,24,40,.06), 0 16px 36px rgba(16,24,40,.10);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#0f1517; --card:#161e21; --ink:#e6ecea; --muted:#94a3a0;
+    --line:#26312f; --accent:#4fc3a8; --accent2:#66d1b8; --accentbg:#173129;
+    --lime:#173129; --limeink:#4fc3a8; --limebg:#173129;
+    --side:#121a1c;
+    --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
+    --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
+    --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+    --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#0f1517; --card:#161e21; --ink:#e6ecea; --muted:#94a3a0;
+  --line:#26312f; --accent:#4fc3a8; --accent2:#66d1b8; --accentbg:#173129;
+  --lime:#173129; --limeink:#4fc3a8; --limebg:#173129;
+  --side:#121a1c;
+  --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
+  --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
+  --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+  --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
+}
+* { box-sizing:border-box; }
+html, body { margin:0; }
+body { background:var(--bg); color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC",system-ui,-apple-system,sans-serif;
+  line-height:1.5; }
+
+/* ---------- layout ---------- */
+.shell { display:grid; grid-template-columns:var(--sidew) 1fr; min-height:100vh; }
+aside.side { background:var(--side); border-right:1px solid var(--line);
+  position:sticky; top:0; height:100vh; overflow-y:auto; padding:18px 14px;
+  display:flex; flex-direction:column; gap:6px; }
+.brand { display:flex; align-items:center; gap:10px; padding:4px 8px 16px;
+  border-bottom:1px solid var(--line); margin-bottom:10px; }
+.brand .logo { width:36px; height:36px; border-radius:10px; flex:none;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:grid; place-items:center; color:#fff; font-weight:800; font-size:.95rem;
+  box-shadow:0 4px 10px color-mix(in srgb,var(--accent) 35%,transparent); }
+.brand .name { font-weight:800; font-size:.98rem; letter-spacing:.02em; line-height:1.15; }
+.brand .tag { font-size:.68rem; color:var(--muted); }
+.side .group { font-size:.66rem; color:var(--muted); letter-spacing:.12em;
+  text-transform:uppercase; padding:10px 10px 4px; }
+.side a.nav { display:flex; align-items:center; gap:10px; padding:9px 10px;
+  border-radius:9px; color:var(--muted); text-decoration:none; font-size:.86rem;
+  font-weight:600; position:relative; transition:background .15s, color .15s; }
+.side a.nav svg { width:18px; height:18px; flex:none; stroke:currentColor; fill:none;
+  stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.side a.nav:hover { background:color-mix(in srgb,var(--accentbg) 60%,transparent); color:var(--ink); }
+.side a.nav.active { background:var(--accentbg); color:var(--accent); }
+.side a.nav.active::before { content:""; position:absolute; left:-14px; top:8px; bottom:8px;
+  width:4px; border-radius:0 4px 4px 0; background:var(--accent); }
+.side a.sub { display:block; padding:5px 10px 5px 38px; font-size:.78rem; color:var(--muted);
+  text-decoration:none; border-radius:7px; }
+.side a.sub:hover { color:var(--accent); background:color-mix(in srgb,var(--accentbg) 50%,transparent); }
+.side .spacer { flex:1; }
+.side .foot { font-size:.68rem; color:var(--muted); padding:10px 8px 0;
+  border-top:1px solid var(--line); line-height:1.6; }
+.side .foot b { color:var(--ink); }
+
+.mainwrap { min-width:0; }
+.topbar { position:sticky; top:0; z-index:20; height:var(--topbarh);
+  background:color-mix(in srgb,var(--card) 88%,transparent); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px;
+  padding:0 26px; }
+.topbar h1 { margin:0; font-size:1.08rem; font-weight:800; letter-spacing:.01em; }
+.topbar .date { color:var(--accent); font-weight:800; }
+.topbar .crumb { color:var(--muted); font-size:.8rem; }
+.topbar .right { margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.topbar .chipbtn { font-size:.76rem; padding:5px 12px; border-radius:99px;
+  background:var(--accentbg); color:var(--accent); text-decoration:none; font-weight:700;
+  border:1px solid color-mix(in srgb,var(--accent) 20%,transparent); }
+.topbar .chipbtn:hover { filter:brightness(1.05); }
+.topbar .stamp { font-size:.74rem; color:var(--muted); }
+.topbar .avatar { display:none; }
+main { padding:22px 26px 60px; max-width:1480px; }
+.sub { color:var(--muted); font-size:.78rem; margin:0 0 16px; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns:1fr; }
+  aside.side { position:static; height:auto; flex-direction:row; flex-wrap:wrap;
+    align-items:center; gap:4px; padding:10px 12px; border-right:none;
+    border-bottom:1px solid var(--line); }
+  .brand { border:none; margin:0 8px 0 0; padding:0; }
+  .side .group, .side .foot, .side .spacer, .side a.sub { display:none; }
+  .side a.nav { padding:7px 10px; }
+  .side a.nav.active::before { display:none; }
+  .topbar { padding:0 14px; }
+  main { padding:16px 14px 50px; }
+}
+
+/* ---------- KPI ---------- */
+.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:14px; margin-bottom:20px; }
+.kpi { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; box-shadow:var(--shadow); display:grid;
+  grid-template-columns:auto 1fr; gap:2px 12px; align-items:center; }
+.kpi .ico { grid-row:1 / span 3; grid-column:1; width:40px; height:40px; border-radius:11px;
+  background:var(--accentbg); color:var(--accent); display:grid; place-items:center;
+  font-size:1rem; font-weight:800; }
+.kpi.buy .ico { background:var(--buybg); color:var(--buy); }
+.kpi.sell .ico { background:var(--sellbg); color:var(--sell); }
+.kpi-label { grid-column:2; font-size:.72rem; color:var(--muted); letter-spacing:.04em; }
+.kpi-val { grid-column:2; font-size:1.55rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.15; }
+.kpi-sub { grid-column:2; font-size:.72rem; color:var(--muted); }
+.kpi.buy .kpi-val, .kpi-val.buy { color:var(--buy); }
+.kpi.sell .kpi-val, .kpi-val.sell { color:var(--sell); }
+
+/* ---------- sections / cards ---------- */
+section { margin-bottom:24px; scroll-margin-top:calc(var(--topbarh) + 10px); }
+h2 { font-size:1rem; margin:0 0 12px; display:flex; align-items:center; gap:10px; }
+h2::before { content:""; width:6px; height:18px; border-radius:3px; background:var(--accent); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
+  transition:box-shadow .15s ease, transform .15s ease; }
+.card:hover { box-shadow:var(--shadow-lg); }
+@media (prefers-reduced-motion: reduce) { .card { transition:none; } }
+.card h3 { margin:0 0 10px; font-size:.9rem; font-weight:700; }
+.card h3 .muted { font-weight:400; }
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
+.grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-bottom:10px; }
+@media (max-width: 480px) { .grid2 { grid-template-columns:1fr; } }
+.note { color:var(--muted); font-size:.75rem; margin:0 0 8px; }
+.muted { color:var(--muted); }
+.up { color:var(--buy); font-weight:600; }
+.down { color:var(--sell); font-weight:600; }
+
+/* ---------- pills / chips / tags ---------- */
+.tag { font-size:.7rem; padding:1px 9px; border-radius:99px; vertical-align:2px; font-weight:700; }
+.tag.buy { background:var(--buybg); color:var(--buy); }
+.tag.sell { background:var(--sellbg); color:var(--sell); }
+.pill { font-size:.7rem; padding:1px 9px; border-radius:99px; white-space:nowrap; font-weight:600; }
+.pill.good, .pill.buy { background:var(--goodbg); color:var(--good); }
+.pill.buy { background:var(--buybg); color:var(--buy); }
+.pill.sell { background:var(--sellbg); color:var(--sell); }
+.pill.warn { background:var(--warnbg); color:var(--warn); }
+.pill.info { background:var(--infobg); color:var(--info); }
+.pill.muted, .pill.mutedp { background:color-mix(in srgb,var(--line) 60%,transparent); color:var(--muted); }
+.chip { display:inline-block; font-size:.7rem; background:var(--infobg); color:var(--info);
+  border-radius:99px; padding:1px 8px; margin:2px 4px 0 0; font-weight:600; }
+
+/* ---------- bars ---------- */
+.bar-list { display:flex; flex-direction:column; gap:9px; }
+.bar-row { display:grid; grid-template-columns:170px 1fr; gap:8px; align-items:center; }
+.bar-label { font-size:.8rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bar-track { position:relative; height:18px; border-radius:6px;
+  background:color-mix(in srgb,var(--line) 55%,transparent);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.06); }
+.bar-fill { height:100%; border-radius:6px 4px 4px 6px; min-width:3px;
+  box-shadow:inset 0 -5px 6px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.12); }
+.bar-val { position:absolute; right:6px; top:0; font-size:.72rem; line-height:18px;
+  color:var(--ink); font-variant-numeric:tabular-nums; }
+.bar-val.on-fill { color:#fff; }
+.bar-sub { grid-column:1/-1; margin-top:-3px; }
+@media (prefers-reduced-motion: no-preference) { .bar-fill { transition:width .4s ease; } }
+
+/* ---------- streak cards ---------- */
+.scard { border-left:4px solid var(--buy); }
+.scard-head { display:flex; justify-content:space-between; align-items:center; gap:6px; }
+.scard-body { font-size:.78rem; color:var(--muted); margin-top:6px; }
+
+/* ---------- filters ---------- */
+.card.filter-card { background:linear-gradient(180deg,
+    color-mix(in srgb,var(--accentbg) 55%,var(--card)), var(--card) 70%);
+  border:1px solid color-mix(in srgb,var(--accent) 24%,var(--line)); }
+.filters { display:grid; gap:12px; align-items:end; }
+.filters label { display:block; font-size:.72rem; font-weight:700; color:var(--accent);
+  letter-spacing:.06em; margin-bottom:5px; }
+.filters select, .filters input { width:100%; padding:10px 12px; border-radius:9px; font-size:.86rem;
+  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));
+  background:var(--card); color:var(--ink); font-family:inherit;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.06); }
+.filters select:hover, .filters input:hover { border-color:var(--accent); }
+.filters select:focus, .filters input:focus { outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent); }
+.filters button { padding:10px 20px; border:none; border-radius:99px; cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
+  font-size:.82rem; font-weight:700; font-family:inherit; letter-spacing:.02em;
+  box-shadow:0 3px 8px color-mix(in srgb,var(--accent) 40%,transparent);
+  transition:transform .12s, box-shadow .12s, filter .12s; }
+.filters button:hover { filter:brightness(1.06); transform:translateY(-1px); }
+.filters button:active { transform:translateY(0); }
+
+/* ---------- tables ---------- */
+.tblwrap { overflow-x:auto; max-height:560px; border-radius:10px; }
+table { border-collapse:separate; border-spacing:0; font-size:.78rem; white-space:nowrap;
+  font-variant-numeric:tabular-nums; width:100%; }
+th { text-align:left; padding:8px 10px; position:sticky; top:0; z-index:1;
+  background:color-mix(in srgb,var(--accentbg) 50%,var(--card));
+  border-bottom:2px solid color-mix(in srgb,var(--accent) 22%,var(--line));
+  font-weight:700; color:var(--muted); font-size:.72rem; cursor:pointer; user-select:none; }
+th:hover { color:var(--accent); }
+th.num { text-align:right; }
+th .arrow { font-size:.6rem; margin-left:2px; opacity:.8; }
+td { padding:6px 10px; border-bottom:1px solid var(--line); }
+td.num { text-align:right; }
+tbody tr:hover td { background:color-mix(in srgb,var(--accent) 6%,transparent); }
+td.sticky-col { position:sticky; z-index:2; background:var(--card); }
+th.sticky-col { position:sticky; z-index:4;
+  background:color-mix(in srgb,var(--accentbg) 50%,var(--card)); }
+.sticky-col-last { box-shadow:4px 0 6px -3px rgba(0,0,0,.16); }
+tbody tr:hover td.sticky-col { background:color-mix(in srgb,var(--accent) 6%,var(--card)); }
+td.cell-buy { background:var(--buybg); }
+td.cell-sell { background:var(--sellbg); }
+.etf-code { color:var(--accent); font-weight:700; }
+details summary { cursor:pointer; color:var(--accent); font-size:.8rem; margin:6px 0; font-weight:600; }
+footer.pagefoot { color:var(--muted); font-size:.72rem; margin-top:26px; padding-top:14px;
+  border-top:1px solid var(--line); }
+footer.pagefoot a { color:var(--accent); }
+
+/* ---------- modal ---------- */
+.fund-link { color:var(--accent); cursor:pointer; text-decoration:none; font-weight:600; }
+.fund-link:hover { text-decoration:underline; }
+.modal-bg { position:fixed; inset:0; background:rgba(10,20,18,.5); z-index:60;
+  display:none; align-items:flex-start; justify-content:center; padding:40px 16px;
+  backdrop-filter:blur(2px); }
+.modal-bg.open { display:flex; }
+.modal { background:var(--card); color:var(--ink); border:1px solid var(--line);
+  border-radius:14px; max-width:660px; width:100%; max-height:85vh; overflow-y:auto;
+  padding:20px 22px; box-shadow:var(--shadow-lg); }
+.modal h3 { margin:0 0 2px; font-size:1rem; padding-right:30px; }
+.modal .close { position:sticky; float:right; top:0; border:none; background:var(--accentbg);
+  color:var(--accent); border-radius:99px; width:28px; height:28px; cursor:pointer;
+  font-size:.9rem; font-weight:800; }
+.mstats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px; margin:12px 0; }
+.mstat { background:color-mix(in srgb,var(--accentbg) 55%,var(--card));
+  border:1px solid var(--line); border-radius:10px; padding:8px 10px; }
+.mstat .v { font-size:1.15rem; font-weight:800; font-variant-numeric:tabular-nums; }
+.mstat .l { font-size:.68rem; color:var(--muted); }
+
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav" href="https://tunglich.github.io/tw-chips-daily/index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/stock.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/whales.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><a class="sub" href="#accum">大戶吸籌</a><a class="sub" href="#distrib">大戶出貨</a><div class="spacer"></div><div class="foot"><b>資料</b>:TDCC 集保週報 × FinLab<br>每週六排程更新</div></aside>
+<div class="mainwrap">
+<div class="topbar">
+  <h1>大戶趨勢 <span class="date">2026/08/14</span></h1>
+  <span class="crumb">千張大戶週變化 × 法人同期買賣超</span>
+  <div class="right"><span class="stamp">產生於 2026-08-15 21:26</span></div>
+</div>
+<main>
+<p class="sub">TDCC 集保週報(每週五結算)· 千張大戶% = 持股 ≥1,000 張者合計持股佔比 ·
+比較 2026/08/07 → 2026/08/14 · 交集 FinLab 投信/外資同週買賣超 · 掃描成交金額前 800 名</p>
+<div class="kpis">
+  <div class="kpi"><div class="ico">掃</div><div class="kpi-label">掃描檔數</div><div class="kpi-val">671</div><div class="kpi-sub">成交金額前 800</div></div>
+  <div class="kpi buy"><div class="ico">增</div><div class="kpi-label">大戶% 上升 ≥0.3pp</div><div class="kpi-val">184</div><div class="kpi-sub">檔</div></div>
+  <div class="kpi sell"><div class="ico">減</div><div class="kpi-label">大戶% 下降 ≥0.3pp</div><div class="kpi-val">158</div><div class="kpi-sub">檔</div></div>
+  <div class="kpi buy"><div class="ico">同</div><div class="kpi-label">大戶增 + 投信外資同買</div><div class="kpi-val">28</div><div class="kpi-sub">最強組合</div></div>
+</div>
+
+<section id="accum"><h2>大戶吸籌 + 法人同買</h2>
+<p class="note">千張大戶% 週增 ≥0.3pp,且投信或外資同週買超。集保是真持股(不是成交量),
+是最抗操弄的籌碼指標;目前累積 2 週集保資料,「連續週」欄從累積 ≥3 週起才有意義。 點代號可跳到個股籌碼頁。</p>
+<div class="card"><div class="tblwrap"><table data-sticky="2"><thead><tr><th>代號</th><th>名稱</th><th>市場</th><th>產業</th><th class='num'>千張大戶%</th><th class='num'>Δ週(pp)</th><th class='num'>連續週</th><th class='num'>千張戶數Δ</th><th class='num'>投信週(張)</th><th class='num'>外資週(張)</th><th class='num'>週漲跌</th></tr></thead><tbody><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#7610">7610</a></td><td>聯友金屬-創</td><td>上市</td><td>綠能環保</td><td class="num">49.00</td><td class="num up">+10.14</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+282</span></td><td class="num down">-5.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4931">4931</a></td><td>新盛力</td><td>上櫃</td><td>電腦及週邊設備業</td><td class="num">23.10</td><td class="num up">+9.62</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+4,810</span></td><td class="num up">+21.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6538">6538</a></td><td>倉和</td><td>上櫃</td><td>電子零組件業</td><td class="num">20.45</td><td class="num up">+7.87</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+590</span></td><td class="num up">+26.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6265">6265</a></td><td>方土昶</td><td>上櫃</td><td>電子通路業</td><td class="num">47.53</td><td class="num up">+7.53</td><td class="num">1</td><td class="num"><span class="pill buy">+6</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+10,544</span></td><td class="num up">+12.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2464">2464</a></td><td>盟立</td><td>上市</td><td>其他電子業</td><td class="num">45.51</td><td class="num up">+7.31</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill buy">+13,174</span></td><td class="num up">+10.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#5351">5351</a></td><td>鈺創</td><td>上櫃</td><td>半導體業</td><td class="num">40.07</td><td class="num up">+7.18</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-20</span></td><td class="num"><span class="pill buy">+21,795</span></td><td class="num up">+27.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8112">8112</a></td><td>至上</td><td>上市</td><td>電子通路業</td><td class="num">41.61</td><td class="num up">+7.11</td><td class="num">1</td><td class="num"><span class="pill buy">+9</span></td><td class="num"><span class="pill buy">+602</span></td><td class="num"><span class="pill buy">+30,903</span></td><td class="num up">+5.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3149">3149</a></td><td>正達</td><td>上市</td><td>光電業</td><td class="num">21.13</td><td class="num up">+6.59</td><td class="num">1</td><td class="num"><span class="pill buy">+12</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+816</span></td><td class="num up">+6.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2465">2465</a></td><td>麗臺</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">35.85</td><td class="num up">+6.27</td><td class="num">1</td><td class="num"><span class="pill buy">+3</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+4,163</span></td><td class="num up">+12.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2359">2359</a></td><td>所羅門</td><td>上市</td><td>其他電子業</td><td class="num">46.37</td><td class="num up">+6.24</td><td class="num">1</td><td class="num"><span class="pill buy">+5</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+8,357</span></td><td class="num up">+11.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2436">2436</a></td><td>偉詮電</td><td>上市</td><td>半導體業</td><td class="num">23.00</td><td class="num up">+5.78</td><td class="num">1</td><td class="num"><span class="pill buy">+6</span></td><td class="num"><span class="pill sell">-325</span></td><td class="num"><span class="pill buy">+8,804</span></td><td class="num up">+12.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6213">6213</a></td><td>聯茂</td><td>上市</td><td>電子零組件業</td><td class="num">60.72</td><td class="num up">+4.80</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill buy">+201</span></td><td class="num"><span class="pill buy">+12,153</span></td><td class="num up">+23.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3605">3605</a></td><td>宏致</td><td>上市</td><td>電子零組件業</td><td class="num">59.48</td><td class="num up">+3.69</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+5,864</span></td><td class="num up">+22.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3003">3003</a></td><td>健和興</td><td>上市</td><td>電子零組件業</td><td class="num">54.88</td><td class="num up">+3.67</td><td class="num">1</td><td class="num"><span class="pill buy">+5</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+2,996</span></td><td class="num up">+6.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3211">3211</a></td><td>順達</td><td>上櫃</td><td>電腦及週邊設備業</td><td class="num">39.76</td><td class="num up">+3.62</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+9,790</span></td><td class="num"><span class="pill sell">-5,283</span></td><td class="num up">+15.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3022">3022</a></td><td>威強電</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">60.86</td><td class="num up">+3.34</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-59</span></td><td class="num"><span class="pill buy">+1,958</span></td><td class="num down">-8.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2727">2727</a></td><td>王品</td><td>上市</td><td>觀光餐旅</td><td class="num">18.58</td><td class="num up">+3.25</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+226</span></td><td class="num down">-2.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6279">6279</a></td><td>胡連</td><td>上櫃</td><td>電子零組件業</td><td class="num">39.91</td><td class="num up">+3.21</td><td class="num">1</td><td class="num"><span class="pill buy">+3</span></td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill buy">+1,436</span></td><td class="num up">+0.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1717">1717</a></td><td>長興</td><td>上市</td><td>化學工業</td><td class="num">61.02</td><td class="num up">+2.99</td><td class="num">1</td><td class="num"><span class="pill buy">+7</span></td><td class="num"><span class="pill buy">+1,015</span></td><td class="num"><span class="pill buy">+19,626</span></td><td class="num up">+8.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6770">6770</a></td><td>力積電</td><td>上市</td><td>半導體業</td><td class="num">42.42</td><td class="num up">+2.97</td><td class="num">1</td><td class="num"><span class="pill sell">-7</span></td><td class="num"><span class="pill buy">+50</span></td><td class="num"><span class="pill buy">+316,382</span></td><td class="num up">+19.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3081">3081</a></td><td>聯亞</td><td>上櫃</td><td>通信網路業</td><td class="num">35.42</td><td class="num up">+2.96</td><td class="num">1</td><td class="num"><span class="pill buy">+3</span></td><td class="num"><span class="pill buy">+811</span></td><td class="num"><span class="pill sell">-331</span></td><td class="num up">+10.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6187">6187</a></td><td>萬潤</td><td>上櫃</td><td>半導體業</td><td class="num">35.61</td><td class="num up">+2.84</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill buy">+817</span></td><td class="num"><span class="pill buy">+1,898</span></td><td class="num up">+12.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2103">2103</a></td><td>台橡</td><td>上市</td><td>橡膠工業</td><td class="num">54.47</td><td class="num up">+2.75</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+12,844</span></td><td class="num up">+7.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2484">2484</a></td><td>希華</td><td>上市</td><td>電子零組件業</td><td class="num">19.83</td><td class="num up">+2.75</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill buy">+2,847</span></td><td class="num up">+1.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6456">6456</a></td><td>GIS-KY</td><td>上市</td><td>光電業</td><td class="num">45.92</td><td class="num up">+2.65</td><td class="num">1</td><td class="num"><span class="pill buy">+6</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+1,683</span></td><td class="num up">+6.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3498">3498</a></td><td>陽程</td><td>上櫃</td><td>其他電子業</td><td class="num">45.10</td><td class="num up">+2.59</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+2,720</span></td><td class="num up">+35.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8021">8021</a></td><td>尖點</td><td>上市</td><td>其他電子業</td><td class="num">38.29</td><td class="num up">+2.47</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+286</span></td><td class="num"><span class="pill buy">+2,108</span></td><td class="num up">+9.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8039">8039</a></td><td>台虹</td><td>上市</td><td>電子零組件業</td><td class="num">61.07</td><td class="num up">+2.47</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill buy">+69</span></td><td class="num"><span class="pill buy">+2,832</span></td><td class="num up">+14.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#9921">9921</a></td><td>巨大</td><td>上市</td><td>運動休閒</td><td class="num">59.33</td><td class="num up">+2.38</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill buy">+119</span></td><td class="num"><span class="pill buy">+11,575</span></td><td class="num up">+9.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1513">1513</a></td><td>中興電</td><td>上市</td><td>電機機械</td><td class="num">41.08</td><td class="num up">+2.34</td><td class="num">1</td><td class="num"><span class="pill buy">+5</span></td><td class="num"><span class="pill sell">-5</span></td><td class="num"><span class="pill buy">+15,016</span></td><td class="num up">+7.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1605">1605</a></td><td>華新</td><td>上市</td><td>電器電纜</td><td class="num">72.60</td><td class="num up">+2.31</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill sell">-52</span></td><td class="num"><span class="pill buy">+110,667</span></td><td class="num up">+13.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2408">2408</a></td><td>南亞科</td><td>上市</td><td>半導體業</td><td class="num">82.52</td><td class="num up">+2.21</td><td class="num">1</td><td class="num"><span class="pill buy">+10</span></td><td class="num"><span class="pill buy">+2,520</span></td><td class="num"><span class="pill buy">+63,676</span></td><td class="num up">+12.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2377">2377</a></td><td>微星</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">63.63</td><td class="num up">+2.18</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill buy">+233</span></td><td class="num"><span class="pill buy">+15,420</span></td><td class="num up">+3.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3680">3680</a></td><td>家登</td><td>上櫃</td><td>半導體業</td><td class="num">40.37</td><td class="num up">+2.01</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+521</span></td><td class="num up">+5.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3293">3293</a></td><td>鈊象</td><td>上櫃</td><td>文化創意業</td><td class="num">48.58</td><td class="num up">+1.99</td><td class="num">1</td><td class="num"><span class="pill buy">+5</span></td><td class="num"><span class="pill buy">+72</span></td><td class="num"><span class="pill sell">-2</span></td><td class="num down">-6.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3042">3042</a></td><td>晶技</td><td>上市</td><td>電子零組件業</td><td class="num">49.51</td><td class="num up">+1.96</td><td class="num">1</td><td class="num"><span class="pill buy">+3</span></td><td class="num"><span class="pill sell">-122</span></td><td class="num"><span class="pill buy">+1,300</span></td><td class="num up">+7.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6202">6202</a></td><td>盛群</td><td>上市</td><td>半導體業</td><td class="num">35.95</td><td class="num up">+1.94</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill sell">-5</span></td><td class="num"><span class="pill buy">+2,480</span></td><td class="num up">+0.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3450">3450</a></td><td>聯鈞</td><td>上市</td><td>半導體業</td><td class="num">34.35</td><td class="num up">+1.93</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill buy">+2,667</span></td><td class="num"><span class="pill buy">+2,759</span></td><td class="num up">+6.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6290">6290</a></td><td>良維</td><td>上櫃</td><td>電子零組件業</td><td class="num">25.95</td><td class="num up">+1.93</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill sell">-25</span></td><td class="num"><span class="pill buy">+1,060</span></td><td class="num up">+8.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3563">3563</a></td><td>牧德</td><td>上市</td><td>光電業</td><td class="num">38.71</td><td class="num up">+1.88</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+124</span></td><td class="num up">+4.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1608">1608</a></td><td>華榮</td><td>上市</td><td>電器電纜</td><td class="num">62.47</td><td class="num up">+1.87</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill sell">-8</span></td><td class="num"><span class="pill buy">+12,644</span></td><td class="num up">+5.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2233">2233</a></td><td>宇隆</td><td>上市</td><td>汽車工業</td><td class="num">34.19</td><td class="num up">+1.83</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+234</span></td><td class="num down">-1.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2376">2376</a></td><td>技嘉</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">65.32</td><td class="num up">+1.81</td><td class="num">1</td><td class="num"><span class="pill buy">+3</span></td><td class="num"><span class="pill sell">-954</span></td><td class="num"><span class="pill buy">+19,593</span></td><td class="num up">+15.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3006">3006</a></td><td>晶豪科</td><td>上市</td><td>半導體業</td><td class="num">49.83</td><td class="num up">+1.79</td><td class="num">1</td><td class="num"><span class="pill sell">-6</span></td><td class="num"><span class="pill sell">-10</span></td><td class="num"><span class="pill buy">+6,475</span></td><td class="num up">+6.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6672">6672</a></td><td>騰輝電子-KY</td><td>上市</td><td>電子零組件業</td><td class="num">17.49</td><td class="num up">+1.79</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+577</span></td><td class="num up">+17.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1709">1709</a></td><td>和益</td><td>上市</td><td>化學工業</td><td class="num">60.51</td><td class="num up">+1.77</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+3,134</span></td><td class="num up">+9.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#7711">7711</a></td><td>永擎</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">56.40</td><td class="num up">+1.73</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+588</span></td><td class="num up">+25.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3443">3443</a></td><td>創意</td><td>上市</td><td>半導體業</td><td class="num">54.19</td><td class="num up">+1.67</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill buy">+294</span></td><td class="num"><span class="pill buy">+210</span></td><td class="num up">+20.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1563">1563</a></td><td>巧新</td><td>上市</td><td>汽車工業</td><td class="num">37.91</td><td class="num up">+1.56</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+403</span></td><td class="num up">+8.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6603">6603</a></td><td>富強鑫</td><td>上櫃</td><td>電機機械</td><td class="num">41.20</td><td class="num up">+1.55</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+1,774</span></td><td class="num up">+7.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2441">2441</a></td><td>超豐</td><td>上市</td><td>半導體業</td><td class="num">64.57</td><td class="num up">+1.53</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill sell">-29</span></td><td class="num"><span class="pill buy">+7,238</span></td><td class="num up">+2.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3141">3141</a></td><td>晶宏</td><td>上櫃</td><td>半導體業</td><td class="num">6.71</td><td class="num up">+1.50</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+305</span></td><td class="num down">-9.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4566">4566</a></td><td>時碩工業</td><td>上市</td><td>電機機械</td><td class="num">49.77</td><td class="num up">+1.47</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+149</span></td><td class="num down">-0.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3231">3231</a></td><td>緯創</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">66.34</td><td class="num up">+1.45</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+759</span></td><td class="num"><span class="pill buy">+27,902</span></td><td class="num up">+5.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4938">4938</a></td><td>和碩</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">75.62</td><td class="num up">+1.42</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill buy">+6,030</span></td><td class="num"><span class="pill buy">+31,906</span></td><td class="num up">+8.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2474">2474</a></td><td>可成</td><td>上市</td><td>其他電子業</td><td class="num">65.45</td><td class="num up">+1.40</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill buy">+178</span></td><td class="num"><span class="pill buy">+2,754</span></td><td class="num up">+9.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6278">6278</a></td><td>台表科</td><td>上市</td><td>光電業</td><td class="num">50.08</td><td class="num up">+1.37</td><td class="num">1</td><td class="num"><span class="pill buy">+5</span></td><td class="num"><span class="pill sell">-211</span></td><td class="num"><span class="pill buy">+1,383</span></td><td class="num up">+10.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2324">2324</a></td><td>仁寶</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">62.00</td><td class="num up">+1.36</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill sell">-61</span></td><td class="num"><span class="pill buy">+108,095</span></td><td class="num up">+18.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2634">2634</a></td><td>漢翔</td><td>上市</td><td>航運業</td><td class="num">49.58</td><td class="num up">+1.31</td><td class="num">1</td><td class="num"><span class="pill buy">+6</span></td><td class="num"><span class="pill sell">-25</span></td><td class="num"><span class="pill buy">+13,175</span></td><td class="num up">+14.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6141">6141</a></td><td>柏承</td><td>上市</td><td>電子零組件業</td><td class="num">43.12</td><td class="num up">+1.28</td><td class="num">1</td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+20</span></td><td class="num up">+2.6%</td></tr></tbody></table></div></div></section>
+
+<section id="distrib"><h2>大戶出貨(籌碼轉散)</h2>
+<p class="note">千張大戶% 週減 ≥0.3pp。若同時法人買超 = 大戶倒貨給法人/散戶;若法人也賣 = 同步退場。</p>
+<div class="card"><div class="tblwrap"><table data-sticky="2"><thead><tr><th>代號</th><th>名稱</th><th>市場</th><th>產業</th><th class='num'>千張大戶%</th><th class='num'>Δ週(pp)</th><th class='num'>連續週</th><th class='num'>千張戶數Δ</th><th class='num'>投信週(張)</th><th class='num'>外資週(張)</th><th class='num'>週漲跌</th></tr></thead><tbody><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#7855">7855</a></td><td>和運租車</td><td>上市</td><td>其他</td><td class="num">72.38</td><td class="num down">-27.16</td><td class="num">1</td><td class="num"><span class="pill buy">+4</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+31</span></td><td class="num "></td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#5904">5904</a></td><td>寶雅*</td><td>上櫃</td><td>居家生活</td><td class="num">78.38</td><td class="num down">-21.62</td><td class="num">1</td><td class="num"><span class="pill buy">+116</span></td><td class="num"><span class="pill buy">+761</span></td><td class="num"><span class="pill sell">-45,832</span></td><td class="num "></td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2478">2478</a></td><td>大毅</td><td>上市</td><td>電子零組件業</td><td class="num">44.00</td><td class="num down">-9.73</td><td class="num">1</td><td class="num"><span class="pill sell">-7</span></td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-10,645</span></td><td class="num up">+12.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#5475">5475</a></td><td>德宏</td><td>上櫃</td><td>電子零組件業</td><td class="num">26.67</td><td class="num down">-8.50</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-6,744</span></td><td class="num up">+38.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6226">6226</a></td><td>光鼎</td><td>上市</td><td>光電業</td><td class="num">13.45</td><td class="num down">-8.38</td><td class="num">1</td><td class="num"><span class="pill sell">-4</span></td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-5,144</span></td><td class="num down">-13.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8358">8358</a></td><td>金居</td><td>上櫃</td><td>電子零組件業</td><td class="num">32.77</td><td class="num down">-6.20</td><td class="num">1</td><td class="num"><span class="pill sell">-7</span></td><td class="num"><span class="pill sell">-3,510</span></td><td class="num"><span class="pill sell">-5,916</span></td><td class="num up">+21.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8096">8096</a></td><td>擎亞</td><td>上櫃</td><td>電子通路業</td><td class="num">40.27</td><td class="num down">-6.14</td><td class="num">1</td><td class="num"><span class="pill sell">-6</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-1,430</span></td><td class="num down">-11.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3055">3055</a></td><td>蔚華科</td><td>上市</td><td>電子通路業</td><td class="num">57.28</td><td class="num down">-5.99</td><td class="num">1</td><td class="num"><span class="pill sell">-5</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-2,950</span></td><td class="num up">+12.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#5388">5388</a></td><td>中磊</td><td>上市</td><td>通信網路業</td><td class="num">40.65</td><td class="num down">-4.98</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-371</span></td><td class="num"><span class="pill sell">-23,575</span></td><td class="num down">-12.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8033">8033</a></td><td>雷虎</td><td>上市</td><td>其他</td><td class="num">23.35</td><td class="num down">-4.75</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill sell">-9,276</span></td><td class="num up">+8.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3090">3090</a></td><td>日電貿</td><td>上市</td><td>電子零組件業</td><td class="num">54.76</td><td class="num down">-4.73</td><td class="num">1</td><td class="num"><span class="pill sell">-8</span></td><td class="num"><span class="pill buy">+418</span></td><td class="num"><span class="pill sell">-12,072</span></td><td class="num up">+15.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2375">2375</a></td><td>凱美</td><td>上市</td><td>電子零組件業</td><td class="num">18.54</td><td class="num down">-4.38</td><td class="num">1</td><td class="num"><span class="pill sell">-4</span></td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-4,630</span></td><td class="num up">+11.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3131">3131</a></td><td>弘塑</td><td>上櫃</td><td>半導體業</td><td class="num">32.21</td><td class="num down">-3.93</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+192</span></td><td class="num"><span class="pill sell">-230</span></td><td class="num up">+6.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4551">4551</a></td><td>智伸科</td><td>上市</td><td>汽車工業</td><td class="num">72.27</td><td class="num down">-3.45</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+1,025</span></td><td class="num"><span class="pill sell">-3,274</span></td><td class="num down">-3.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3163">3163</a></td><td>波若威</td><td>上櫃</td><td>通信網路業</td><td class="num">19.16</td><td class="num down">-3.37</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-485</span></td><td class="num up">+4.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3324">3324</a></td><td>雙鴻</td><td>上櫃</td><td>其他電子業</td><td class="num">27.64</td><td class="num down">-3.30</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+14</span></td><td class="num down">-0.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3026">3026</a></td><td>禾伸堂</td><td>上市</td><td>電子零組件業</td><td class="num">38.86</td><td class="num down">-3.15</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+2,964</span></td><td class="num"><span class="pill sell">-11,737</span></td><td class="num up">+20.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8086">8086</a></td><td>宏捷科</td><td>上櫃</td><td>半導體業</td><td class="num">45.01</td><td class="num down">-3.03</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-536</span></td><td class="num up">+2.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8271">8271</a></td><td>宇瞻</td><td>上市</td><td>半導體業</td><td class="num">39.09</td><td class="num down">-2.88</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill buy">+15</span></td><td class="num"><span class="pill sell">-3,887</span></td><td class="num down">-1.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4908">4908</a></td><td>前鼎</td><td>上櫃</td><td>通信網路業</td><td class="num">40.95</td><td class="num down">-2.76</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+8</span></td><td class="num up">+8.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3661">3661</a></td><td>世芯-KY</td><td>上市</td><td>半導體業</td><td class="num">13.62</td><td class="num down">-2.69</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-883</span></td><td class="num"><span class="pill buy">+2,363</span></td><td class="num up">+13.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4991">4991</a></td><td>環宇-KY</td><td>上櫃</td><td>半導體業</td><td class="num">40.32</td><td class="num down">-2.59</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-815</span></td><td class="num"><span class="pill sell">-791</span></td><td class="num down">-1.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6209">6209</a></td><td>今國光</td><td>上市</td><td>光電業</td><td class="num">31.30</td><td class="num down">-2.53</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-2,765</span></td><td class="num down">-6.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3624">3624</a></td><td>光頡</td><td>上櫃</td><td>電子零組件業</td><td class="num">49.99</td><td class="num down">-2.50</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-6,044</span></td><td class="num up">+19.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#1714">1714</a></td><td>和桐</td><td>上市</td><td>化學工業</td><td class="num">48.10</td><td class="num down">-2.43</td><td class="num">1</td><td class="num"><span class="pill sell">-6</span></td><td class="num"><span class="pill buy">+79</span></td><td class="num"><span class="pill sell">-6,331</span></td><td class="num up">+4.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3653">3653</a></td><td>健策</td><td>上市</td><td>電子零組件業</td><td class="num">60.55</td><td class="num down">-2.37</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill sell">-350</span></td><td class="num"><span class="pill buy">+171</span></td><td class="num up">+10.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8103">8103</a></td><td>瀚荃</td><td>上市</td><td>電子零組件業</td><td class="num">27.63</td><td class="num down">-2.32</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-190</span></td><td class="num up">+0.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3374">3374</a></td><td>精材</td><td>上櫃</td><td>半導體業</td><td class="num">57.54</td><td class="num down">-2.25</td><td class="num">1</td><td class="num"><span class="pill sell">-5</span></td><td class="num"><span class="pill sell">-5</span></td><td class="num"><span class="pill sell">-4,099</span></td><td class="num up">+6.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2425">2425</a></td><td>承啟</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">36.35</td><td class="num down">-2.24</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill sell">-5,114</span></td><td class="num down">-22.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8150">8150</a></td><td>南茂</td><td>上市</td><td>半導體業</td><td class="num">56.29</td><td class="num down">-2.21</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill sell">-8,300</span></td><td class="num"><span class="pill sell">-16,452</span></td><td class="num up">+6.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4916">4916</a></td><td>事欣科</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">20.91</td><td class="num down">-2.17</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-2,690</span></td><td class="num down">-1.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3339">3339</a></td><td>泰谷</td><td>上櫃</td><td>光電業</td><td class="num">16.35</td><td class="num down">-2.13</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-255</span></td><td class="num down">-1.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3227">3227</a></td><td>原相</td><td>上櫃</td><td>半導體業</td><td class="num">27.62</td><td class="num down">-2.11</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-601</span></td><td class="num"><span class="pill buy">+399</span></td><td class="num down">-3.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3490">3490</a></td><td>單井</td><td>上櫃</td><td>光電業</td><td class="num">12.10</td><td class="num down">-2.06</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+1,583</span></td><td class="num up">+30.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6679">6679</a></td><td>鈺太</td><td>上櫃</td><td>半導體業</td><td class="num">46.20</td><td class="num down">-2.03</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-164</span></td><td class="num down">-1.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3289">3289</a></td><td>宜特</td><td>上櫃</td><td>其他電子業</td><td class="num">12.94</td><td class="num down">-2.02</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-196</span></td><td class="num down">-1.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3675">3675</a></td><td>德微</td><td>上櫃</td><td>半導體業</td><td class="num">55.16</td><td class="num down">-2.00</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-52</span></td><td class="num up">+0.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3105">3105</a></td><td>穩懋</td><td>上櫃</td><td>半導體業</td><td class="num">44.40</td><td class="num down">-1.94</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+2,391</span></td><td class="num"><span class="pill sell">-6,240</span></td><td class="num up">+3.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6217">6217</a></td><td>中探針</td><td>上櫃</td><td>電子零組件業</td><td class="num">17.62</td><td class="num down">-1.90</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+135</span></td><td class="num up">+2.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2368">2368</a></td><td>金像電</td><td>上市</td><td>電子零組件業</td><td class="num">68.16</td><td class="num down">-1.81</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill buy">+4,820</span></td><td class="num"><span class="pill sell">-8,950</span></td><td class="num up">+3.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2481">2481</a></td><td>強茂</td><td>上市</td><td>半導體業</td><td class="num">55.76</td><td class="num down">-1.79</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill sell">-174</span></td><td class="num"><span class="pill sell">-10,510</span></td><td class="num up">+3.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3376">3376</a></td><td>新日興</td><td>上市</td><td>電子零組件業</td><td class="num">31.75</td><td class="num down">-1.79</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill buy">+8</span></td><td class="num"><span class="pill buy">+1,007</span></td><td class="num up">+2.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2610">2610</a></td><td>華航</td><td>上市</td><td>航運業</td><td class="num">69.81</td><td class="num down">-1.76</td><td class="num">1</td><td class="num"><span class="pill buy">+2</span></td><td class="num"><span class="pill buy">+1,446</span></td><td class="num"><span class="pill sell">-147,201</span></td><td class="num down">-11.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3135">3135</a></td><td>凌航</td><td>上市</td><td>半導體業</td><td class="num">42.54</td><td class="num down">-1.68</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+305</span></td><td class="num down">-2.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8050">8050</a></td><td>廣積</td><td>上櫃</td><td>電腦及週邊設備業</td><td class="num">36.32</td><td class="num down">-1.67</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-7,380</span></td><td class="num down">-15.9%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3491">3491</a></td><td>昇達科</td><td>上櫃</td><td>通信網路業</td><td class="num">15.50</td><td class="num down">-1.66</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+65</span></td><td class="num"><span class="pill sell">-681</span></td><td class="num up">+11.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3717">3717</a></td><td>聯嘉投控</td><td>上市</td><td>汽車工業</td><td class="num">27.80</td><td class="num down">-1.57</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-72</span></td><td class="num down">-6.2%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6531">6531</a></td><td>愛普*</td><td>上市</td><td>半導體業</td><td class="num">53.08</td><td class="num down">-1.55</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-19</span></td><td class="num"><span class="pill sell">-101</span></td><td class="num down">-2.0%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#6491">6491</a></td><td>晶碩</td><td>上市</td><td>生技醫療業</td><td class="num">54.86</td><td class="num down">-1.52</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill sell">-68</span></td><td class="num"><span class="pill buy">+625</span></td><td class="num down">-1.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#7795">7795</a></td><td>長廣</td><td>上市</td><td>電子零組件業</td><td class="num">63.01</td><td class="num down">-1.51</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-119</span></td><td class="num up">+25.1%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#4915">4915</a></td><td>致伸</td><td>上市</td><td>電子零組件業</td><td class="num">52.33</td><td class="num down">-1.49</td><td class="num">1</td><td class="num"><span class="pill sell">-3</span></td><td class="num"><span class="pill buy">+1,532</span></td><td class="num"><span class="pill sell">-3,079</span></td><td class="num up">+2.4%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#5371">5371</a></td><td>中光電</td><td>上櫃</td><td>光電業</td><td class="num">37.84</td><td class="num down">-1.47</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill sell">-1,842</span></td><td class="num"><span class="pill buy">+2,917</span></td><td class="num up">+8.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8081">8081</a></td><td>致新</td><td>上市</td><td>半導體業</td><td class="num">23.67</td><td class="num down">-1.45</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill sell">-54</span></td><td class="num"><span class="pill buy">+1,919</span></td><td class="num up">+0.8%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3167">3167</a></td><td>大量</td><td>上市</td><td>電機機械</td><td class="num">46.82</td><td class="num down">-1.41</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-66</span></td><td class="num"><span class="pill sell">-1,258</span></td><td class="num down">-2.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2439">2439</a></td><td>美律</td><td>上市</td><td>通信網路業</td><td class="num">24.39</td><td class="num down">-1.40</td><td class="num">1</td><td class="num"><span class="pill sell">-2</span></td><td class="num"><span class="pill buy">+1</span></td><td class="num"><span class="pill buy">+163</span></td><td class="num up">+0.6%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2492">2492</a></td><td>華新科</td><td>上市</td><td>電子零組件業</td><td class="num">64.84</td><td class="num down">-1.40</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill buy">+2,745</span></td><td class="num"><span class="pill sell">-28,178</span></td><td class="num up">+20.5%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3363">3363</a></td><td>上詮</td><td>上櫃</td><td>通信網路業</td><td class="num">29.94</td><td class="num down">-1.38</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill buy">+13</span></td><td class="num"><span class="pill sell">-1,823</span></td><td class="num up">+0.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#2236">2236</a></td><td>百達-KY</td><td>上市</td><td>汽車工業</td><td class="num">63.08</td><td class="num down">-1.36</td><td class="num">1</td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill muted">+0</span></td><td class="num"><span class="pill sell">-379</span></td><td class="num down">-2.7%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#3715">3715</a></td><td>定穎投控</td><td>上市</td><td>電子零組件業</td><td class="num">20.70</td><td class="num down">-1.31</td><td class="num">1</td><td class="num"><span class="pill sell">-4</span></td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill sell">-3,433</span></td><td class="num up">+1.3%</td></tr><tr><td><a class="fund-link" href="https://tunglich.github.io/tw-chips-daily/stock.html#8210">8210</a></td><td>勤誠</td><td>上市</td><td>電腦及週邊設備業</td><td class="num">61.08</td><td class="num down">-1.29</td><td class="num">1</td><td class="num"><span class="pill sell">-1</span></td><td class="num"><span class="pill sell">-2,570</span></td><td class="num"><span class="pill buy">+158</span></td><td class="num down">-10.3%</td></tr></tbody></table></div></div></section>
+
+<footer class="pagefoot">資料:TDCC 集保戶股權分散表(opendata,每週)× FinLab 三大法人 · 千張戶數Δ = 持股 ≥1,000 張的戶數變化 ·
+週漲跌 = 週五收盤 vs 上週五 · 情報用途、非投資建議</footer>
+
+</main>
+</div>
+</div>
+<script>
+(function () {
+  // ---- 凍結欄(table[data-sticky=N]) ----
+  function stickyCols(root) {
+    (root || document).querySelectorAll("table[data-sticky]").forEach(function (tb) {
+      var n = parseInt(tb.dataset.sticky) || 0;
+      if (!n) return;
+      var first = tb.querySelector("tr");
+      if (!first) return;
+      var lefts = [], acc = 0;
+      for (var i = 0; i < n && i < first.children.length; i++) {
+        lefts.push(acc);
+        acc += first.children[i].getBoundingClientRect().width;
+      }
+      tb.querySelectorAll("tr").forEach(function (tr) {
+        for (var i = 0; i < n && i < tr.children.length; i++) {
+          var c = tr.children[i];
+          c.classList.add("sticky-col");
+          c.style.left = lefts[i] + "px";
+          c.classList.toggle("sticky-col-last", i === n - 1);
+        }
+      });
+    });
+  }
+  window.__stickyCols = stickyCols;
+  window.addEventListener("resize", function () {
+    clearTimeout(window.__stickyT);
+    window.__stickyT = setTimeout(function () { stickyCols(); }, 150);
+  });
+  document.querySelectorAll("details").forEach(function (d) {
+    d.addEventListener("toggle", function () { stickyCols(); });
+  });
+
+  // ---- 表頭排序 ----
+  function cellVal(td) {
+    var t = (td.textContent || "").trim();
+    if (!t) return { n: null, s: "" };
+    var m = t.replace(/,/g, "").replace(/[%億張+]/g, "").replace(/\*$/, "").replace(/pp$/, "");
+    var n = parseFloat(m);
+    return isNaN(n) ? { n: null, s: t } : { n: n, s: t };
+  }
+  function hookSort(root) {
+    (root || document).querySelectorAll("table").forEach(function (tb) {
+      if (tb.dataset.sortHooked) return;
+      tb.dataset.sortHooked = "1";
+      var ths = tb.querySelectorAll("thead th");
+      ths.forEach(function (th, ci) {
+        th.title = "點擊排序";
+        th.addEventListener("click", function () {
+          var body = tb.querySelector("tbody");
+          var rows = Array.prototype.slice.call(body.querySelectorAll("tr"));
+          var dir = th.dataset.dir === "desc" ? "asc" : "desc";
+          ths.forEach(function (h) {
+            delete h.dataset.dir;
+            var a = h.querySelector(".arrow"); if (a) a.remove();
+          });
+          th.dataset.dir = dir;
+          var ar = document.createElement("span");
+          ar.className = "arrow"; ar.textContent = dir === "desc" ? "▼" : "▲";
+          th.appendChild(ar);
+          rows.sort(function (r1, r2) {
+            var a = cellVal(r1.children[ci]), b = cellVal(r2.children[ci]);
+            var cmp;
+            if (a.n !== null && b.n !== null) cmp = a.n - b.n;
+            else if (a.n !== null) cmp = 1;
+            else if (b.n !== null) cmp = -1;
+            else cmp = a.s.localeCompare(b.s, "zh-Hant");
+            return dir === "desc" ? -cmp : cmp;
+          });
+          rows.forEach(function (r) { body.appendChild(r); });
+        });
+      });
+    });
+  }
+  window.__hookSort = hookSort;
+
+  // ---- sidebar 次選單:捲動時高亮目前區段 ----
+  var subs = document.querySelectorAll(".side a.sub[href^='#']");
+  if (subs.length && "IntersectionObserver" in window) {
+    var map = {};
+    subs.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && map[e.target.id]) {
+          subs.forEach(function (a) { a.style.color = ""; a.style.fontWeight = ""; });
+          map[e.target.id].style.color = "var(--accent)";
+          map[e.target.id].style.fontWeight = "700";
+        }
+      });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    Object.keys(map).forEach(function (id) {
+      var el = document.getElementById(id); if (el) io.observe(el);
+    });
+  }
+
+  hookSort();
+  stickyCols();
+})();
+</script>
+
+</body>
+</html>
