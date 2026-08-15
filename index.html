@@ -7,35 +7,39 @@
 
 <style>
 :root {
-  --bg:#f3f5f4; --card:#ffffff; --ink:#18232b; --muted:#6a7781;
-  --line:#e3e8e6; --accent:#0f6e5c; --accent2:#12836e; --accentbg:#e4f3ee;
-  --side:#ffffff; --sidew:232px; --topbarh:60px;
-  --buy:#c2403a; --buybg:#faeceb; --sell:#20714f; --sellbg:#e8f2ed;
-  --good:#20714f; --goodbg:#e8f2ed; --warn:#8a5f00; --warnbg:#f7efdc;
-  --info:#0f6e5c; --infobg:#e4f3ee; --hitbg:#e2eef3; --hit:#0f4c60;
-  --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 18px rgba(16,24,40,.06);
-  --shadow-lg:0 4px 8px rgba(16,24,40,.06), 0 16px 36px rgba(16,24,40,.10);
+  /* COINEST-style palette: 深墨綠主色 + 亮萊姆綠強調 + 薄荷底 */
+  --bg:#f5f7f4; --card:#ffffff; --ink:#1b2a24; --muted:#6c7a73;
+  --line:#e6ebe7; --accent:#1e4d3a; --accent2:#2a6a50; --accentbg:#e8f4ea;
+  --lime:#c6f06f; --limeink:#1b3d2f; --limebg:#eefadb;
+  --side:#f2f7f1; --sidew:236px; --topbarh:64px; --radius:16px;
+  --buy:#c2403a; --buybg:#fbecea; --sell:#1f7a4f; --sellbg:#e6f4ec;
+  --good:#1f7a4f; --goodbg:#e6f4ec; --warn:#8a5f00; --warnbg:#f7efdc;
+  --info:#1e4d3a; --infobg:#e8f4ea; --hitbg:#e2eef3; --hit:#0f4c60;
+  --shadow:0 1px 2px rgba(20,40,30,.03), 0 4px 14px rgba(20,40,30,.05);
+  --shadow-lg:0 4px 8px rgba(20,40,30,.06), 0 16px 36px rgba(20,40,30,.10);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg:#0f1517; --card:#161e21; --ink:#e6ecea; --muted:#94a3a0;
-    --line:#26312f; --accent:#4fc3a8; --accent2:#66d1b8; --accentbg:#173129;
-    --side:#121a1c;
+    --bg:#0e1412; --card:#151d1a; --ink:#e6ece8; --muted:#93a29a;
+    --line:#26312c; --accent:#7fd6a9; --accent2:#95e0b9; --accentbg:#183327;
+    --lime:#a9dc57; --limeink:#0f2418; --limebg:#243a1c;
+    --side:#111917;
     --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
     --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
-    --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+    --info:#7fd6a9; --infobg:#183327; --hitbg:#1c2f36; --hit:#8fd0e5;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.35);
     --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
   }
 }
 :root[data-theme="dark"] {
-  --bg:#0f1517; --card:#161e21; --ink:#e6ecea; --muted:#94a3a0;
-  --line:#26312f; --accent:#4fc3a8; --accent2:#66d1b8; --accentbg:#173129;
-  --side:#121a1c;
+  --bg:#0e1412; --card:#151d1a; --ink:#e6ece8; --muted:#93a29a;
+  --line:#26312c; --accent:#7fd6a9; --accent2:#95e0b9; --accentbg:#183327;
+  --lime:#a9dc57; --limeink:#0f2418; --limebg:#243a1c;
+  --side:#111917;
   --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
   --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
-  --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
-  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+  --info:#7fd6a9; --infobg:#183327; --hitbg:#1c2f36; --hit:#8fd0e5;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.35);
   --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
 }
 * { box-sizing:border-box; }
@@ -47,50 +51,52 @@ body { background:var(--bg); color:var(--ink);
 /* ---------- layout ---------- */
 .shell { display:grid; grid-template-columns:var(--sidew) 1fr; min-height:100vh; }
 aside.side { background:var(--side); border-right:1px solid var(--line);
-  position:sticky; top:0; height:100vh; overflow-y:auto; padding:18px 14px;
-  display:flex; flex-direction:column; gap:6px; }
-.brand { display:flex; align-items:center; gap:10px; padding:4px 8px 16px;
-  border-bottom:1px solid var(--line); margin-bottom:10px; }
-.brand .logo { width:36px; height:36px; border-radius:10px; flex:none;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  display:grid; place-items:center; color:#fff; font-weight:800; font-size:.95rem;
-  box-shadow:0 4px 10px color-mix(in srgb,var(--accent) 35%,transparent); }
-.brand .name { font-weight:800; font-size:.98rem; letter-spacing:.02em; line-height:1.15; }
-.brand .tag { font-size:.68rem; color:var(--muted); }
-.side .group { font-size:.66rem; color:var(--muted); letter-spacing:.12em;
-  text-transform:uppercase; padding:10px 10px 4px; }
-.side a.nav { display:flex; align-items:center; gap:10px; padding:9px 10px;
-  border-radius:9px; color:var(--muted); text-decoration:none; font-size:.86rem;
-  font-weight:600; position:relative; transition:background .15s, color .15s; }
+  position:sticky; top:0; height:100vh; overflow-y:auto; padding:20px 16px;
+  display:flex; flex-direction:column; gap:4px; }
+.brand { display:flex; align-items:center; gap:11px; padding:2px 8px 18px; margin-bottom:8px; }
+.brand .logo { width:38px; height:38px; border-radius:11px; flex:none;
+  background:var(--accent); display:grid; place-items:center; color:var(--lime);
+  font-weight:900; font-size:1rem; box-shadow:0 6px 14px color-mix(in srgb,var(--accent) 30%,transparent); }
+.brand .name { font-weight:800; font-size:1rem; letter-spacing:.01em; line-height:1.15; color:var(--accent); }
+.brand .tag { font-size:.68rem; color:var(--muted); letter-spacing:.04em; }
+.side .group { font-size:.64rem; color:var(--muted); letter-spacing:.14em;
+  text-transform:uppercase; padding:8px 12px 6px; }
+.side a.nav { display:flex; align-items:center; gap:11px; padding:10px 12px;
+  border-radius:12px; color:color-mix(in srgb,var(--ink) 75%,var(--muted)); text-decoration:none;
+  font-size:.88rem; font-weight:600; position:relative; transition:background .15s, color .15s; }
 .side a.nav svg { width:18px; height:18px; flex:none; stroke:currentColor; fill:none;
   stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
-.side a.nav:hover { background:color-mix(in srgb,var(--accentbg) 60%,transparent); color:var(--ink); }
-.side a.nav.active { background:var(--accentbg); color:var(--accent); }
-.side a.nav.active::before { content:""; position:absolute; left:-14px; top:8px; bottom:8px;
-  width:4px; border-radius:0 4px 4px 0; background:var(--accent); }
-.side a.sub { display:block; padding:5px 10px 5px 38px; font-size:.78rem; color:var(--muted);
-  text-decoration:none; border-radius:7px; }
-.side a.sub:hover { color:var(--accent); background:color-mix(in srgb,var(--accentbg) 50%,transparent); }
+.side a.nav:hover { background:color-mix(in srgb,var(--card) 70%,transparent); color:var(--accent); }
+.side a.nav.active { background:var(--lime); color:var(--limeink); font-weight:800;
+  box-shadow:0 4px 12px color-mix(in srgb,var(--lime) 55%,transparent); }
+.side a.nav.active svg { stroke:var(--limeink); }
+.side a.sub { display:block; padding:6px 12px 6px 41px; font-size:.78rem; color:var(--muted);
+  text-decoration:none; border-radius:9px; }
+.side a.sub:hover { color:var(--accent); background:color-mix(in srgb,var(--card) 70%,transparent); }
 .side .spacer { flex:1; }
-.side .foot { font-size:.68rem; color:var(--muted); padding:10px 8px 0;
-  border-top:1px solid var(--line); line-height:1.6; }
-.side .foot b { color:var(--ink); }
+.side .foot { font-size:.68rem; color:var(--muted); padding:12px 12px; margin-top:8px;
+  background:var(--card); border-radius:12px; line-height:1.6; }
+.side .foot b { color:var(--accent); }
 
 .mainwrap { min-width:0; }
 .topbar { position:sticky; top:0; z-index:20; height:var(--topbarh);
-  background:color-mix(in srgb,var(--card) 88%,transparent); backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px;
-  padding:0 26px; }
-.topbar h1 { margin:0; font-size:1.08rem; font-weight:800; letter-spacing:.01em; }
-.topbar .date { color:var(--accent); font-weight:800; }
+  background:color-mix(in srgb,var(--bg) 85%,transparent); backdrop-filter:blur(10px);
+  display:flex; align-items:center; gap:14px; padding:0 28px; }
+.topbar h1 { margin:0; font-size:1.25rem; font-weight:800; letter-spacing:.005em; color:var(--accent); }
+.topbar .date { color:var(--ink); font-weight:700; font-size:1rem; margin-left:4px;
+  background:var(--card); border:1px solid var(--line); border-radius:99px; padding:3px 12px; }
 .topbar .crumb { color:var(--muted); font-size:.8rem; }
-.topbar .right { margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-.topbar .chipbtn { font-size:.76rem; padding:5px 12px; border-radius:99px;
-  background:var(--accentbg); color:var(--accent); text-decoration:none; font-weight:700;
-  border:1px solid color-mix(in srgb,var(--accent) 20%,transparent); }
-.topbar .chipbtn:hover { filter:brightness(1.05); }
-.topbar .stamp { font-size:.74rem; color:var(--muted); }
-main { padding:22px 26px 60px; max-width:1480px; }
+.topbar .right { margin-left:auto; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.topbar .chipbtn { font-size:.76rem; padding:6px 14px; border-radius:99px;
+  background:var(--card); color:var(--accent); text-decoration:none; font-weight:700;
+  border:1px solid var(--line); }
+.topbar .chipbtn:hover { background:var(--limebg); }
+.topbar .stamp { font-size:.74rem; color:var(--muted); background:var(--card);
+  border:1px solid var(--line); border-radius:99px; padding:5px 12px; }
+.topbar .avatar { width:34px; height:34px; border-radius:50%; background:var(--accent);
+  color:var(--lime); display:grid; place-items:center; font-weight:800; font-size:.8rem;
+  box-shadow:0 3px 8px color-mix(in srgb,var(--accent) 30%,transparent); }
+main { padding:8px 28px 60px; max-width:1500px; }
 .sub { color:var(--muted); font-size:.78rem; margin:0 0 16px; }
 
 @media (max-width: 900px) {
@@ -106,34 +112,43 @@ main { padding:22px 26px 60px; max-width:1480px; }
   main { padding:16px 14px 50px; }
 }
 
-/* ---------- KPI ---------- */
-.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:14px; margin-bottom:20px; }
-.kpi { background:var(--card); border:1px solid var(--line); border-radius:14px;
-  padding:14px 16px; box-shadow:var(--shadow); display:grid;
-  grid-template-columns:auto 1fr; gap:2px 12px; align-items:center; }
-.kpi .ico { grid-row:1 / span 3; grid-column:1; width:40px; height:40px; border-radius:11px;
+/* ---------- KPI (COINEST style: 圓形淡綠圖示、大數字、右上三點) ---------- */
+.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px; margin-bottom:22px; }
+.kpi { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px 14px; box-shadow:var(--shadow); display:grid;
+  grid-template-columns:auto 1fr; grid-template-rows:auto auto auto;
+  gap:0 12px; align-items:start; position:relative; }
+.kpi::after { content:"⋯"; position:absolute; right:14px; top:8px; color:var(--muted);
+  font-size:1rem; letter-spacing:.05em; opacity:.6; }
+.kpi .ico { grid-row:1; grid-column:1; width:40px; height:40px; border-radius:50%;
   background:var(--accentbg); color:var(--accent); display:grid; place-items:center;
-  font-size:1rem; font-weight:800; }
+  font-size:.92rem; font-weight:800; margin-bottom:10px; }
 .kpi.buy .ico { background:var(--buybg); color:var(--buy); }
 .kpi.sell .ico { background:var(--sellbg); color:var(--sell); }
-.kpi-label { grid-column:2; font-size:.72rem; color:var(--muted); letter-spacing:.04em; }
-.kpi-val { grid-column:2; font-size:1.55rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.15; }
-.kpi-sub { grid-column:2; }
+.kpi-label { grid-column:1 / -1; grid-row:3; font-size:.76rem; color:var(--muted); order:3; }
+.kpi-val { grid-column:1 / -1; grid-row:2; font-size:1.7rem; font-weight:800;
+  font-variant-numeric:tabular-nums; line-height:1.15; letter-spacing:-.01em; }
+.kpi-sub { grid-column:2; grid-row:1; font-size:.7rem; color:var(--limeink);
+  background:var(--limebg); border-radius:99px; padding:2px 8px; justify-self:start;
+  margin-top:10px; font-weight:700; }
 .kpi.buy .kpi-val, .kpi-val.buy { color:var(--buy); }
 .kpi.sell .kpi-val, .kpi-val.sell { color:var(--sell); }
-.kpi-sub { font-size:.72rem; color:var(--muted); }
+.kpi.buy .kpi-sub { background:var(--buybg); color:var(--buy); }
+.kpi.sell .kpi-sub { background:var(--sellbg); color:var(--sell); }
 
 /* ---------- sections / cards ---------- */
-section { margin-bottom:24px; scroll-margin-top:calc(var(--topbarh) + 10px); }
-h2 { font-size:1rem; margin:0 0 12px; display:flex; align-items:center; gap:10px; }
-h2::before { content:""; width:6px; height:18px; border-radius:3px; background:var(--accent); }
-.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
-  padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
+section { margin-bottom:26px; scroll-margin-top:calc(var(--topbarh) + 10px); }
+h2 { font-size:1.02rem; margin:0 0 12px; display:flex; align-items:center; gap:10px;
+  font-weight:800; color:var(--accent); }
+h2::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--lime);
+  box-shadow:0 0 0 3px var(--limebg); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px 20px; margin-bottom:16px; box-shadow:var(--shadow);
   transition:box-shadow .15s ease, transform .15s ease; }
 .card:hover { box-shadow:var(--shadow-lg); }
 @media (prefers-reduced-motion: reduce) { .card { transition:none; } }
-.card h3 { margin:0 0 10px; font-size:.9rem; font-weight:700; }
+.card h3 { margin:0 0 12px; font-size:.92rem; font-weight:800; display:flex; align-items:center; gap:8px; }
 .card h3 .muted { font-weight:400; }
 .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
 .grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-bottom:10px; }
@@ -154,20 +169,18 @@ h2::before { content:""; width:6px; height:18px; border-radius:3px; background:v
 .pill.warn { background:var(--warnbg); color:var(--warn); }
 .pill.info { background:var(--infobg); color:var(--info); }
 .pill.muted, .pill.mutedp { background:color-mix(in srgb,var(--line) 60%,transparent); color:var(--muted); }
-.chip { display:inline-block; font-size:.7rem; background:var(--infobg); color:var(--info);
-  border-radius:99px; padding:1px 8px; margin:2px 4px 0 0; font-weight:600; }
+.chip { display:inline-block; font-size:.7rem; background:var(--limebg); color:var(--limeink);
+  border-radius:99px; padding:2px 9px; margin:3px 4px 0 0; font-weight:700; }
 
 /* ---------- bars ---------- */
-.bar-list { display:flex; flex-direction:column; gap:9px; }
+.bar-list { display:flex; flex-direction:column; gap:10px; }
 .bar-row { display:grid; grid-template-columns:170px 1fr; gap:8px; align-items:center; }
 .bar-label { font-size:.8rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.bar-track { position:relative; height:18px; border-radius:6px;
-  background:color-mix(in srgb,var(--line) 55%,transparent);
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.06); }
-.bar-fill { height:100%; border-radius:6px 4px 4px 6px; min-width:3px;
-  box-shadow:inset 0 -5px 6px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.12); }
-.bar-val { position:absolute; right:6px; top:0; font-size:.72rem; line-height:18px;
-  color:var(--ink); font-variant-numeric:tabular-nums; }
+.bar-track { position:relative; height:20px; border-radius:8px;
+  background:color-mix(in srgb,var(--line) 45%,transparent); }
+.bar-fill { height:100%; border-radius:8px; min-width:4px; }
+.bar-val { position:absolute; right:8px; top:0; font-size:.72rem; line-height:20px;
+  color:var(--ink); font-variant-numeric:tabular-nums; font-weight:700; }
 .bar-val.on-fill { color:#fff; }
 .bar-sub { grid-column:1/-1; margin-top:-3px; }
 @media (prefers-reduced-motion: no-preference) { .bar-fill { transition:width .4s ease; } }
@@ -178,46 +191,42 @@ h2::before { content:""; width:6px; height:18px; border-radius:3px; background:v
 .scard-body { font-size:.78rem; color:var(--muted); margin-top:6px; }
 
 /* ---------- filters ---------- */
-.card.filter-card { background:linear-gradient(180deg,
-    color-mix(in srgb,var(--accentbg) 55%,var(--card)), var(--card) 70%);
-  border:1px solid color-mix(in srgb,var(--accent) 24%,var(--line)); }
+.card.filter-card { background:var(--side); border:1px solid var(--line); }
 .filters { display:grid; gap:12px; align-items:end; }
 .filters label { display:block; font-size:.72rem; font-weight:700; color:var(--accent);
-  letter-spacing:.06em; margin-bottom:5px; }
-.filters select { width:100%; padding:10px 12px; border-radius:9px; font-size:.86rem;
-  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));
-  background:var(--card); color:var(--ink); font-family:inherit;
-  box-shadow:inset 0 1px 3px rgba(0,0,0,.06); }
-.filters select:hover { border-color:var(--accent); }
-.filters select:focus { outline:none; border-color:var(--accent);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent); }
-.filters button { padding:10px 20px; border:none; border-radius:99px; cursor:pointer;
-  background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
-  font-size:.82rem; font-weight:700; font-family:inherit; letter-spacing:.02em;
-  box-shadow:0 3px 8px color-mix(in srgb,var(--accent) 40%,transparent);
-  transition:transform .12s, box-shadow .12s, filter .12s; }
-.filters button:hover { filter:brightness(1.06); transform:translateY(-1px); }
+  letter-spacing:.06em; margin-bottom:6px; }
+.filters select, .filters input { width:100%; padding:11px 14px; border-radius:12px; font-size:.86rem;
+  border:1px solid var(--line); background:var(--card); color:var(--ink); font-family:inherit; }
+.filters select:hover, .filters input:hover { border-color:color-mix(in srgb,var(--accent) 45%,var(--line)); }
+.filters select:focus, .filters input:focus { outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--limebg); }
+.filters button { padding:11px 22px; border:none; border-radius:12px; cursor:pointer;
+  background:var(--accent); color:#fff;
+  font-size:.84rem; font-weight:800; font-family:inherit; letter-spacing:.02em;
+  box-shadow:0 4px 10px color-mix(in srgb,var(--accent) 30%,transparent);
+  transition:transform .12s, box-shadow .12s, background .12s; }
+.filters button:hover { background:var(--accent2); transform:translateY(-1px); }
 .filters button:active { transform:translateY(0); }
 
 /* ---------- tables ---------- */
-.tblwrap { overflow-x:auto; max-height:560px; border-radius:10px; }
+.tblwrap { overflow-x:auto; max-height:560px; border-radius:12px; }
 table { border-collapse:separate; border-spacing:0; font-size:.78rem; white-space:nowrap;
   font-variant-numeric:tabular-nums; width:100%; }
-th { text-align:left; padding:8px 10px; position:sticky; top:0; z-index:1;
-  background:color-mix(in srgb,var(--accentbg) 50%,var(--card));
-  border-bottom:2px solid color-mix(in srgb,var(--accent) 22%,var(--line));
+th { text-align:left; padding:9px 12px; position:sticky; top:0; z-index:1;
+  background:var(--side); border-bottom:1px solid var(--line);
   font-weight:700; color:var(--muted); font-size:.72rem; cursor:pointer; user-select:none; }
+thead th:first-child { border-top-left-radius:10px; }
+thead th:last-child { border-top-right-radius:10px; }
 th:hover { color:var(--accent); }
 th.num { text-align:right; }
 th .arrow { font-size:.6rem; margin-left:2px; opacity:.8; }
-td { padding:6px 10px; border-bottom:1px solid var(--line); }
+td { padding:7px 12px; border-bottom:1px solid var(--line); }
 td.num { text-align:right; }
-tbody tr:hover td { background:color-mix(in srgb,var(--accent) 6%,transparent); }
+tbody tr:hover td { background:color-mix(in srgb,var(--limebg) 60%,transparent); }
 td.sticky-col { position:sticky; z-index:2; background:var(--card); }
-th.sticky-col { position:sticky; z-index:4;
-  background:color-mix(in srgb,var(--accentbg) 50%,var(--card)); }
+th.sticky-col { position:sticky; z-index:4; background:var(--side); }
 .sticky-col-last { box-shadow:4px 0 6px -3px rgba(0,0,0,.16); }
-tbody tr:hover td.sticky-col { background:color-mix(in srgb,var(--accent) 6%,var(--card)); }
+tbody tr:hover td.sticky-col { background:color-mix(in srgb,var(--limebg) 60%,var(--card)); }
 td.cell-buy { background:var(--buybg); }
 td.cell-sell { background:var(--sellbg); }
 .etf-code { color:var(--accent); font-weight:700; }
@@ -255,7 +264,7 @@ footer.pagefoot a { color:var(--accent); }
 <div class="topbar">
   <h1>籌碼日報 <span class="date">2026/08/14</span></h1>
   <span class="crumb">投信主動基金歸屬 · 自營商 · 分點觀察</span>
-  <div class="right"><span class="stamp">產生於 2026-08-15 18:12</span></div>
+  <div class="right"><span class="stamp">產生於 2026-08-15 20:22</span><span class="avatar" title="tunglich">TL</span></div>
 </div>
 <main>
 <p class="sub">投信主動基金歸屬(已扣 ETF)· 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
@@ -264,9 +273,9 @@ footer.pagefoot a { color:var(--accent); }
 <section id="overview"><h2>總覽 — 主動金額 Top 8</h2>
 <div class="grid2">
   <div class="card"><h3>主動買超 Top 8 <span class="tag buy">買</span></h3>
-  <div class="bar-list"><div class="bar-row"><div class="bar-label"><b>8046 南電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:100.0%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val on-fill">33.3億</span></div><div class='bar-sub'><span class="chip" title="校準機率 59%(佔比 18%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 59%</span><span class="chip" title="校準機率 58%(佔比 11%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 58%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">復華 57%</span><span class="chip" title="校準機率 55%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 55%</span></div></div><div class="bar-row"><div class="bar-label"><b>8996 高力</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:83.6%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val on-fill">27.8億</span></div><div class='bar-sub'><span class="chip" title="校準機率 60%(佔比 21%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">國泰 60%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 57%</span><span class="chip" title="校準機率 56%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">第一金 56%</span></div></div><div class="bar-row"><div class="bar-label"><b>3017 奇鋐</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:75.8%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val on-fill">25.2億</span></div><div class='bar-sub'><span class="chip" title="校準機率 60%(佔比 19%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">安聯 60%</span><span class="chip" title="校準機率 59%(佔比 14%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 59%</span><span class="chip" title="校準機率 57%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 57%</span></div></div><div class="bar-row"><div class="bar-label"><b>6669 緯穎</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:59.4%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val">19.8億</span></div><div class='bar-sub'><span class="chip" title="校準機率 57%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">群益 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 57%</span></div></div><div class="bar-row"><div class="bar-label"><b>2368 金像電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:41.7%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val">13.9億</span></div><div class='bar-sub'><span class="chip" title="校準機率 59%(佔比 14%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">大華銀 59%</span><span class="chip" title="校準機率 58%(佔比 13%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">元大 58%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 57%</span><span class="chip" title="校準機率 57%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 57%</span></div></div><div class="bar-row"><div class="bar-label"><b>2344 華邦電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:26.6%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val">8.9億</span></div><div class='bar-sub'><span class="chip" title="校準機率 61%(佔比 52%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 61%</span><span class="chip" title="校準機率 58%(佔比 12%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 58%</span></div></div><div class="bar-row"><div class="bar-label"><b>2327 國巨*</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:24.3%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val">8.1億</span></div><div class='bar-sub'><span class="chip" title="校準機率 59%(佔比 18%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">國泰 59%</span><span class="chip" title="校準機率 59%(佔比 14%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 59%</span><span class="chip" title="校準機率 58%(佔比 12%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 58%</span><span class="chip" title="校準機率 56%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 56%</span></div></div><div class="bar-row"><div class="bar-label"><b>2383 台光電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:22.6%;background:linear-gradient(180deg,color-mix(in srgb,var(--buy) 78%,white),var(--buy))"></div><span class="bar-val">7.5億</span></div><div class='bar-sub'><span class="chip" title="校準機率 60%(佔比 33%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">安聯 60%</span><span class="chip" title="校準機率 60%(佔比 21%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 60%</span><span class="chip" title="校準機率 52%(佔比 3%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">大華銀 52%</span></div></div></div></div>
+  <div class="bar-list"><div class="bar-row"><div class="bar-label"><b>8046 南電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--buy)"></div><span class="bar-val on-fill">33.3億</span></div><div class='bar-sub'><span class="chip" title="校準機率 59%(佔比 18%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 59%</span><span class="chip" title="校準機率 58%(佔比 11%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 58%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">復華 57%</span><span class="chip" title="校準機率 55%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 55%</span></div></div><div class="bar-row"><div class="bar-label"><b>8996 高力</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:83.6%;background:var(--buy)"></div><span class="bar-val on-fill">27.8億</span></div><div class='bar-sub'><span class="chip" title="校準機率 60%(佔比 21%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">國泰 60%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 57%</span><span class="chip" title="校準機率 56%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">第一金 56%</span></div></div><div class="bar-row"><div class="bar-label"><b>3017 奇鋐</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:75.8%;background:var(--buy)"></div><span class="bar-val on-fill">25.2億</span></div><div class='bar-sub'><span class="chip" title="校準機率 60%(佔比 19%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">安聯 60%</span><span class="chip" title="校準機率 59%(佔比 14%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 59%</span><span class="chip" title="校準機率 57%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 57%</span></div></div><div class="bar-row"><div class="bar-label"><b>6669 緯穎</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:59.4%;background:var(--buy)"></div><span class="bar-val">19.8億</span></div><div class='bar-sub'><span class="chip" title="校準機率 57%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">群益 57%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 57%</span></div></div><div class="bar-row"><div class="bar-label"><b>2368 金像電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:41.7%;background:var(--buy)"></div><span class="bar-val">13.9億</span></div><div class='bar-sub'><span class="chip" title="校準機率 59%(佔比 14%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">大華銀 59%</span><span class="chip" title="校準機率 58%(佔比 13%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">元大 58%</span><span class="chip" title="校準機率 57%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 57%</span><span class="chip" title="校準機率 57%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 57%</span></div></div><div class="bar-row"><div class="bar-label"><b>2344 華邦電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:26.6%;background:var(--buy)"></div><span class="bar-val">8.9億</span></div><div class='bar-sub'><span class="chip" title="校準機率 61%(佔比 52%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 61%</span><span class="chip" title="校準機率 58%(佔比 12%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 58%</span></div></div><div class="bar-row"><div class="bar-label"><b>2327 國巨*</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:24.3%;background:var(--buy)"></div><span class="bar-val">8.1億</span></div><div class='bar-sub'><span class="chip" title="校準機率 59%(佔比 18%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">國泰 59%</span><span class="chip" title="校準機率 59%(佔比 14%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 59%</span><span class="chip" title="校準機率 58%(佔比 12%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 58%</span><span class="chip" title="校準機率 56%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 56%</span></div></div><div class="bar-row"><div class="bar-label"><b>2383 台光電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:22.6%;background:var(--buy)"></div><span class="bar-val">7.5億</span></div><div class='bar-sub'><span class="chip" title="校準機率 60%(佔比 33%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">安聯 60%</span><span class="chip" title="校準機率 60%(佔比 21%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 60%</span><span class="chip" title="校準機率 52%(佔比 3%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">大華銀 52%</span></div></div></div></div>
   <div class="card"><h3>主動賣超 Top 8 <span class="tag sell">賣</span></h3>
-  <div class="bar-list"><div class="bar-row"><div class="bar-label"><b>6515 穎崴</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:100.0%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val on-fill">19.0億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 15%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 54%</span><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 53%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 53%</span><span class="chip" title="校準機率 52%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>3711 日月光投控</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:96.3%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val on-fill">18.3億</span></div><div class='bar-sub'><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 53%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 53%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 53%</span><span class="chip" title="校準機率 52%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">復華 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>3661 世芯-KY</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:50.3%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val">9.6億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 16%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 54%</span><span class="chip" title="校準機率 54%(佔比 11%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 54%</span><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 53%</span><span class="chip" title="校準機率 51%(佔比 5%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">第一金 51%</span></div></div><div class="bar-row"><div class="bar-label"><b>2303 聯電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:48.3%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val">9.2億</span></div><div class='bar-sub'><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 53%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">元大 53%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 53%</span><span class="chip" title="校準機率 52%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>8210 勤誠</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:45.4%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val">8.6億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 30%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 54%</span><span class="chip" title="校準機率 54%(佔比 12%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">復華 54%</span><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">群益 53%</span><span class="chip" title="校準機率 52%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>3189 景碩</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:43.5%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val">8.3億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 21%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 54%</span><span class="chip" title="校準機率 54%(佔比 18%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 54%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 53%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 53%</span></div></div><div class="bar-row"><div class="bar-label"><b>8299 群聯</b> <span class='muted'>上櫃</span></div><div class="bar-track"><div class="bar-fill" style="width:34.0%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val">6.5億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 27%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 54%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 53%</span><span class="chip" title="校準機率 52%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 52%</span><span class="chip" title="校準機率 50%(佔比 3%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">大華銀 50%</span></div></div><div class="bar-row"><div class="bar-label"><b>2404 漢唐</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:22.9%;background:linear-gradient(180deg,color-mix(in srgb,var(--sell) 78%,white),var(--sell))"></div><span class="bar-val">4.4億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 42%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 54%</span><span class="chip" title="校準機率 54%(佔比 20%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">安聯 54%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 53%</span></div></div></div></div>
+  <div class="bar-list"><div class="bar-row"><div class="bar-label"><b>6515 穎崴</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:100.0%;background:var(--sell)"></div><span class="bar-val on-fill">19.0億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 15%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 54%</span><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 53%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 53%</span><span class="chip" title="校準機率 52%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>3711 日月光投控</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:96.3%;background:var(--sell)"></div><span class="bar-val on-fill">18.3億</span></div><div class='bar-sub'><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 53%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 53%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 53%</span><span class="chip" title="校準機率 52%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">復華 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>3661 世芯-KY</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:50.3%;background:var(--sell)"></div><span class="bar-val">9.6億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 16%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 54%</span><span class="chip" title="校準機率 54%(佔比 11%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 54%</span><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 53%</span><span class="chip" title="校準機率 51%(佔比 5%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">第一金 51%</span></div></div><div class="bar-row"><div class="bar-label"><b>2303 聯電</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:48.3%;background:var(--sell)"></div><span class="bar-val">9.2億</span></div><div class='bar-sub'><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 53%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">元大 53%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 53%</span><span class="chip" title="校準機率 52%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">台新 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>8210 勤誠</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:45.4%;background:var(--sell)"></div><span class="bar-val">8.6億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 30%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 54%</span><span class="chip" title="校準機率 54%(佔比 12%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">復華 54%</span><span class="chip" title="校準機率 53%(佔比 10%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">群益 53%</span><span class="chip" title="校準機率 52%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">中國信託 52%</span></div></div><div class="bar-row"><div class="bar-label"><b>3189 景碩</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:43.5%;background:var(--sell)"></div><span class="bar-val">8.3億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 21%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 54%</span><span class="chip" title="校準機率 54%(佔比 18%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 54%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 53%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">富邦 53%</span></div></div><div class="bar-row"><div class="bar-label"><b>8299 群聯</b> <span class='muted'>上櫃</span></div><div class="bar-track"><div class="bar-fill" style="width:34.0%;background:var(--sell)"></div><span class="bar-val">6.5億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 27%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 54%</span><span class="chip" title="校準機率 53%(佔比 8%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">野村 53%</span><span class="chip" title="校準機率 52%(佔比 7%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">統一 52%</span><span class="chip" title="校準機率 50%(佔比 3%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">大華銀 50%</span></div></div><div class="bar-row"><div class="bar-label"><b>2404 漢唐</b> <span class='muted'>上市</span></div><div class="bar-track"><div class="bar-fill" style="width:22.9%;background:var(--sell)"></div><span class="bar-val">4.4億</span></div><div class='bar-sub'><span class="chip" title="校準機率 54%(佔比 42%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">路博邁 54%</span><span class="chip" title="校準機率 54%(佔比 20%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">安聯 54%</span><span class="chip" title="校準機率 53%(佔比 9%):同等佔比的歸屬訊號,歷史上當月月報/季報驗證同向的比例">凱基 53%</span></div></div></div></div>
 </div>
 <p class="note">投信 chip 的 % 為<strong>校準機率</strong>:依五年可驗證樣本
 (月報前十大+季報全持股),同等佔比的歸屬訊號事後於當月報表驗證同向的比例
