@@ -111,14 +111,15 @@ main { padding:22px 26px 60px; max-width:1480px; }
   gap:14px; margin-bottom:20px; }
 .kpi { background:var(--card); border:1px solid var(--line); border-radius:14px;
   padding:14px 16px; box-shadow:var(--shadow); display:grid;
-  grid-template-columns:1fr auto; gap:4px 10px; align-items:start; }
-.kpi .ico { grid-row:1 / span 3; width:38px; height:38px; border-radius:10px;
+  grid-template-columns:auto 1fr; gap:2px 12px; align-items:center; }
+.kpi .ico { grid-row:1 / span 3; grid-column:1; width:40px; height:40px; border-radius:11px;
   background:var(--accentbg); color:var(--accent); display:grid; place-items:center;
   font-size:1rem; font-weight:800; }
 .kpi.buy .ico { background:var(--buybg); color:var(--buy); }
 .kpi.sell .ico { background:var(--sellbg); color:var(--sell); }
-.kpi-label { font-size:.72rem; color:var(--muted); letter-spacing:.04em; }
-.kpi-val { font-size:1.55rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.15; }
+.kpi-label { grid-column:2; font-size:.72rem; color:var(--muted); letter-spacing:.04em; }
+.kpi-val { grid-column:2; font-size:1.55rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.15; }
+.kpi-sub { grid-column:2; }
 .kpi.buy .kpi-val, .kpi-val.buy { color:var(--buy); }
 .kpi.sell .kpi-val, .kpi-val.sell { color:var(--sell); }
 .kpi-sub { font-size:.72rem; color:var(--muted); }
@@ -254,10 +255,10 @@ footer.pagefoot a { color:var(--accent); }
 <div class="topbar">
   <h1>籌碼日報 <span class="date">2026/08/14</span></h1>
   <span class="crumb">投信主動基金歸屬 · 自營商 · 分點觀察</span>
-  <div class="right"><span class="stamp">產生於 2026-08-15 17:45</span></div>
+  <div class="right"><span class="stamp">產生於 2026-08-15 17:48</span></div>
 </div>
 <main>
-<p class="sub">投信主動基金歸屬(已扣 ETF)· 產生於 2026-08-15 17:45 · 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
+<p class="sub">投信主動基金歸屬(已扣 ETF)· 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
 <div class="kpis"><div class="kpi buy"><div class="ico">買</div><div class="kpi-label">主動買超金額</div><div class="kpi-val">193.0</div><div class="kpi-sub">億元</div></div><div class="kpi sell"><div class="ico">賣</div><div class="kpi-label">主動賣超金額</div><div class="kpi-val">110.2</div><div class="kpi-sub">億元</div></div><div class="kpi "><div class="ico">連</div><div class="kpi-label">投信連買 ≥2日</div><div class="kpi-val">43</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="ico">3</div><div class="kpi-label">其中連 3 日</div><div class="kpi-val">26</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="ico">觀</div><div class="kpi-label">觀察名單</div><div class="kpi-val">12</div><div class="kpi-sub">3 檔仍在買</div></div><div class="kpi "><div class="ico">自</div><div class="kpi-label">自營高信心歸屬</div><div class="kpi-val">9</div><div class="kpi-sub">檔</div></div></div>
 
 <section id="overview"><h2>總覽 — 主動金額 Top 8</h2>
