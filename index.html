@@ -79,10 +79,11 @@ aside.side { background:var(--side); border-right:1px solid var(--line);
 .side .foot b { color:var(--accent); }
 
 .mainwrap { min-width:0; }
-.topbar { position:sticky; top:0; z-index:20; height:var(--topbarh);
+.topbar { position:sticky; top:0; z-index:20; min-height:var(--topbarh);
   background:color-mix(in srgb,var(--bg) 85%,transparent); backdrop-filter:blur(10px);
-  display:flex; align-items:center; gap:14px; padding:0 28px; }
-.topbar h1 { margin:0; font-size:1.25rem; font-weight:800; letter-spacing:.005em; color:var(--accent); }
+  display:flex; align-items:center; gap:14px; padding:10px 28px; flex-wrap:wrap; }
+.topbar h1 { margin:0; font-size:1.25rem; font-weight:800; letter-spacing:.005em; color:var(--accent);
+  display:flex; align-items:center; gap:8px; white-space:nowrap; }
 .topbar .date { color:var(--ink); font-weight:700; font-size:1rem; margin-left:4px;
   background:var(--card); border:1px solid var(--line); border-radius:99px; padding:3px 12px; }
 .topbar .crumb { color:var(--muted); font-size:.8rem; }
@@ -264,7 +265,7 @@ footer.pagefoot a { color:var(--accent); }
 <div class="topbar">
   <h1>籌碼日報 <span class="date">2026/08/14</span></h1>
   <span class="crumb">投信主動基金歸屬 · 自營商 · 分點觀察</span>
-  <div class="right"><span class="stamp">產生於 2026-08-15 20:22</span><span class="avatar" title="tunglich">TL</span></div>
+  <div class="right"><span class="stamp">產生於 2026-08-15 20:24</span><span class="avatar" title="tunglich">TL</span></div>
 </div>
 <main>
 <p class="sub">投信主動基金歸屬(已扣 ETF)· 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
