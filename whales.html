@@ -14,6 +14,7 @@
   --buy:#c2403a; --buybg:#faeceb; --sell:#20714f; --sellbg:#e8f2ed;
   --good:#20714f; --goodbg:#e8f2ed; --warn:#8a5f00; --warnbg:#f7efdc;
   --info:#0f6e5c; --infobg:#e4f3ee; --hitbg:#e2eef3; --hit:#0f4c60;
+  --onstrong:#ffffff;
   --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 18px rgba(16,24,40,.06);
   --shadow-lg:0 4px 8px rgba(16,24,40,.06), 0 16px 36px rgba(16,24,40,.10);
 }
@@ -26,6 +27,7 @@
     --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
     --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
     --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
+    --onstrong:#0f1517;
     --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
     --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
   }
@@ -38,6 +40,7 @@
   --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
   --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
   --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
+  --onstrong:#0f1517;
   --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
   --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
 }
@@ -78,6 +81,29 @@ aside.side { background:var(--side); border-right:1px solid var(--line);
 .side .foot { font-size:.68rem; color:var(--muted); padding:10px 8px 0;
   border-top:1px solid var(--line); line-height:1.6; }
 .side .foot b { color:var(--ink); }
+/* ---------- 自選股(localStorage) ---------- */
+.wl { border-top:1px solid var(--line); margin-top:8px; padding:10px 6px 4px; }
+.wl .wl-h { font-size:.66rem; color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
+  padding:0 4px 6px; display:flex; justify-content:space-between; align-items:center; }
+.wl .wl-add { display:flex; gap:4px; padding:0 2px 6px; }
+.wl .wl-add input { flex:1; min-width:0; padding:5px 8px; font-size:.76rem; border:1px solid var(--line);
+  border-radius:7px; background:var(--card); color:var(--ink); font-family:inherit; }
+.wl .wl-add button { padding:5px 9px; font-size:.74rem; border:none; border-radius:7px; cursor:pointer;
+  background:var(--accent); color:#fff; font-weight:700; font-family:inherit; }
+.wl ul { list-style:none; margin:0; padding:0; max-height:180px; overflow-y:auto; }
+.wl li { display:flex; align-items:center; gap:6px; padding:3px 6px; font-size:.78rem; border-radius:6px; }
+.wl li:hover { background:color-mix(in srgb,var(--accentbg) 60%,transparent); }
+.wl li a { color:var(--ink); text-decoration:none; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.wl li a b { color:var(--accent); margin-right:4px; }
+.wl li .rm { border:none; background:none; color:var(--muted); cursor:pointer; font-size:.8rem; padding:0 2px; }
+.wl li .rm:hover { color:var(--buy); }
+.wl .wl-empty { font-size:.72rem; color:var(--muted); padding:2px 6px 4px; }
+tr.wl-hit td:first-child { box-shadow:inset 3px 0 0 var(--accent); }
+tr.wl-hit td { background:color-mix(in srgb,var(--accentbg) 45%,transparent); }
+.wl-digest .wl-item { display:flex; gap:10px; align-items:baseline; padding:6px 0; border-bottom:1px dashed var(--line); font-size:.82rem; flex-wrap:wrap; }
+.wl-digest .wl-item:last-child { border-bottom:none; }
+.wl-digest .wl-item b a { color:var(--accent); text-decoration:none; }
+.wl-digest .wl-item .src { font-size:.68rem; color:var(--muted); background:var(--infobg); border-radius:99px; padding:0 7px; }
 
 .mainwrap { min-width:0; }
 .topbar { position:sticky; top:0; z-index:20; height:var(--topbarh);
@@ -253,12 +279,12 @@ footer.pagefoot a { color:var(--accent); }
 </head>
 <body>
 <div class="shell">
-<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav" href="https://tunglich.github.io/tw-chips-daily/index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/stock.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/whales.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><a class="sub" href="#accum">大戶吸籌</a><a class="sub" href="#distrib">大戶出貨</a><div class="spacer"></div><div class="foot"><b>資料</b>:TDCC 集保週報 × FinLab<br>每週六排程更新</div></aside>
+<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav" href="https://tunglich.github.io/tw-chips-daily/index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/stock.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/whales.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><a class="sub" href="#accum">大戶吸籌</a><a class="sub" href="#distrib">大戶出貨</a><div class="wl" id="wl"><div class="wl-h"><span>自選股</span><span id="wl-n" class="muted"></span></div><div class="wl-add"><input id="wl-in" placeholder="代號,如 2330" maxlength="6"><button id="wl-btn" type="button">＋</button></div><ul id="wl-list"></ul><div class="wl-empty" id="wl-empty">尚未加入。表格中的自選股會高亮,日報頂部有異動摘要。</div></div><div class="spacer"></div><div class="foot"><b>資料</b>:TDCC 集保週報 × FinLab<br>每週六排程更新</div></aside>
 <div class="mainwrap">
 <div class="topbar">
   <h1>大戶趨勢 <span class="date">2026/08/14</span></h1>
   <span class="crumb">千張大戶週變化 × 法人同期買賣超</span>
-  <div class="right"><span class="stamp">產生於 2026-08-15 21:26</span></div>
+  <div class="right"><span class="stamp">產生於 2026-08-15 21:54</span></div>
 </div>
 <main>
 <p class="sub">TDCC 集保週報(每週五結算)· 千張大戶% = 持股 ≥1,000 張者合計持股佔比 ·
@@ -382,6 +408,94 @@ footer.pagefoot a { color:var(--accent); }
 
   hookSort();
   stickyCols();
+
+  // ---- 自選股(localStorage 'tw_chips_watchlist') ----
+  var WL_KEY = "tw_chips_watchlist";
+  var SITE = "https://tunglich.github.io/tw-chips-daily/";
+  function wlGet() { try { return JSON.parse(localStorage.getItem(WL_KEY) || "[]"); } catch (e) { return []; } }
+  function wlSet(a) { localStorage.setItem(WL_KEY, JSON.stringify(a)); }
+  // 名稱來源:頁面表格中「代號」旁的名稱(第一次看到就記住)
+  function wlNames() { try { return JSON.parse(localStorage.getItem(WL_KEY + "_names") || "{}"); } catch (e) { return {}; } }
+  function wlSaveNames(m) { localStorage.setItem(WL_KEY + "_names", JSON.stringify(m)); }
+  function rowSid(tr) {
+    var tds = tr.children;
+    for (var i = 0; i < Math.min(4, tds.length); i++) {
+      var t = (tds[i].textContent || "").trim();
+      if (/^\d{4}$/.test(t)) return { sid: t, name: (tds[i + 1] ? (tds[i + 1].textContent || "").trim() : ""), col: i };
+    }
+    return null;
+  }
+  function wlRender() {
+    var list = wlGet(), names = wlNames();
+    var ul = document.getElementById("wl-list"), empty = document.getElementById("wl-empty"), n = document.getElementById("wl-n");
+    if (!ul) return;
+    ul.innerHTML = "";
+    list.forEach(function (sid) {
+      var li = document.createElement("li");
+      li.innerHTML = '<a href="' + SITE + 'stock.html#' + sid + '"><b>' + sid + '</b>' + (names[sid] || "") + '</a>' +
+                     '<button class="rm" title="移除" data-sid="' + sid + '">✕</button>';
+      ul.appendChild(li);
+    });
+    if (empty) empty.style.display = list.length ? "none" : "";
+    if (n) n.textContent = list.length ? list.length + " 檔" : "";
+    wlHighlight();
+    wlDigest();
+  }
+  function wlHighlight() {
+    var set = {}; wlGet().forEach(function (s) { set[s] = 1; });
+    var names = wlNames(), changed = false;
+    document.querySelectorAll("table tbody tr").forEach(function (tr) {
+      var r = rowSid(tr);
+      if (!r) return;
+      tr.classList.toggle("wl-hit", !!set[r.sid]);
+      if (set[r.sid] && r.name && !names[r.sid] && r.name.length <= 8 && !/^[\d.,+\-%]+$/.test(r.name)) { names[r.sid] = r.name; changed = true; }
+    });
+    if (changed) wlSaveNames(names);
+  }
+  function wlDigest() {
+    var box = document.getElementById("wl-digest"); if (!box) return;
+    var set = {}; wlGet().forEach(function (s) { set[s] = 1; });
+    var items = [];
+    document.querySelectorAll("section").forEach(function (sec) {
+      var h = sec.querySelector("h2"); var title = h ? h.textContent.trim().split(" ")[0].replace(/[—(].*$/, "") : "";
+      sec.querySelectorAll("table tbody tr").forEach(function (tr) {
+        var r = rowSid(tr); if (!r || !set[r.sid]) return;
+        var cells = Array.prototype.map.call(tr.children, function (td) { return (td.textContent || "").trim(); })
+                     .filter(function (t, i) { return t && i !== 0; }).slice(0, 5).join(" · ");
+        items.push({ sid: r.sid, name: r.name, src: title, txt: cells });
+      });
+      // 連續動向卡片
+      sec.querySelectorAll(".scard").forEach(function (c) {
+        var b = c.querySelector("b"); if (!b) return;
+        var m = (b.textContent || "").match(/^(\d{4})\s*(\S*)/); if (!m || !set[m[1]]) return;
+        items.push({ sid: m[1], name: m[2], src: "連續動向", txt: (c.querySelector(".scard-body") || {}).textContent || "" });
+      });
+    });
+    var list = wlGet();
+    if (!list.length) { box.style.display = "none"; return; }
+    box.style.display = "";
+    var body = box.querySelector(".wl-digest");
+    if (!items.length) { body.innerHTML = '<div class="muted" style="font-size:.8rem">自選股今日未出現在任何區段(無歸屬旗標 / 連續動向 / 觀察名單 / 內部人事件)。</div>'; return; }
+    body.innerHTML = items.slice(0, 40).map(function (it) {
+      return '<div class="wl-item"><b><a href="' + SITE + 'stock.html#' + it.sid + '">' + it.sid + ' ' + (it.name || "") + '</a></b>' +
+             '<span class="src">' + it.src + '</span><span>' + it.txt.replace(/\s+/g, " ").slice(0, 160) + '</span></div>';
+    }).join("");
+  }
+  var wlBtn = document.getElementById("wl-btn"), wlIn = document.getElementById("wl-in");
+  function wlAdd() {
+    var v = (wlIn.value || "").trim().match(/\d{4}/); if (!v) return;
+    var list = wlGet(); if (list.indexOf(v[0]) < 0) { list.push(v[0]); wlSet(list); }
+    wlIn.value = ""; wlRender();
+  }
+  if (wlBtn) wlBtn.addEventListener("click", wlAdd);
+  if (wlIn) wlIn.addEventListener("keydown", function (e) { if (e.key === "Enter") wlAdd(); });
+  var wlList = document.getElementById("wl-list");
+  if (wlList) wlList.addEventListener("click", function (e) {
+    var b = e.target.closest(".rm"); if (!b) return;
+    wlSet(wlGet().filter(function (s) { return s !== b.dataset.sid; })); wlRender();
+  });
+  window.__wlRefresh = wlRender;
+  wlRender();
 })();
 </script>
 
