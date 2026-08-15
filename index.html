@@ -1,170 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台股籌碼日報 2026/08/14</title>
+
 <style>
 :root {
-  --bg:#f4f5f7; --card:#ffffff; --ink:#1a2530; --muted:#61707f;
-  --line:#e2e6ea; --accent:#155e75;
+  --bg:#f3f5f4; --card:#ffffff; --ink:#18232b; --muted:#6a7781;
+  --line:#e3e8e6; --accent:#0f6e5c; --accent2:#12836e; --accentbg:#e4f3ee;
+  --side:#ffffff; --sidew:232px; --topbarh:60px;
   --buy:#c2403a; --buybg:#faeceb; --sell:#20714f; --sellbg:#e8f2ed;
   --good:#20714f; --goodbg:#e8f2ed; --warn:#8a5f00; --warnbg:#f7efdc;
-  --info:#155e75; --infobg:#e6f0f4; --hitbg:#e2eef3; --hit:#0f4c60;
-  /* 深底格子的反差字色:淺色主題底色深 → 用白字 */
-  --onstrong:#ffffff;
+  --info:#0f6e5c; --infobg:#e4f3ee; --hitbg:#e2eef3; --hit:#0f4c60;
+  --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 18px rgba(16,24,40,.06);
+  --shadow-lg:0 4px 8px rgba(16,24,40,.06), 0 16px 36px rgba(16,24,40,.10);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg:#12181f; --card:#1a222b; --ink:#e5eaef; --muted:#93a1af;
-    --line:#2b3641; --accent:#67b7cf;
+    --bg:#0f1517; --card:#161e21; --ink:#e6ecea; --muted:#94a3a0;
+    --line:#26312f; --accent:#4fc3a8; --accent2:#66d1b8; --accentbg:#173129;
+    --side:#121a1c;
     --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
     --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
-    --info:#67b7cf; --infobg:#1c2f36; --hitbg:#1c2f36; --hit:#8fd0e5;
-    /* 深色主題的強調色本身偏亮 → 深底格子改用深字 */
-    --onstrong:#12181f;
+    --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+    --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
   }
 }
 :root[data-theme="dark"] {
-  --bg:#12181f; --card:#1a222b; --ink:#e5eaef; --muted:#93a1af;
-  --line:#2b3641; --accent:#67b7cf;
+  --bg:#0f1517; --card:#161e21; --ink:#e6ecea; --muted:#94a3a0;
+  --line:#26312f; --accent:#4fc3a8; --accent2:#66d1b8; --accentbg:#173129;
+  --side:#121a1c;
   --buy:#e0736d; --buybg:#3a2422; --sell:#5cba8f; --sellbg:#1d3229;
   --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
-  --info:#67b7cf; --infobg:#1c2f36; --hitbg:#1c2f36; --hit:#8fd0e5;
-  --onstrong:#12181f;
+  --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+  --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
 }
 * { box-sizing:border-box; }
-body { color:var(--ink); margin:0;
-  background:linear-gradient(180deg,
-    color-mix(in srgb,var(--infobg) 55%,var(--bg)), var(--bg) 340px);
-  font-family:"Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
-  line-height:1.5; padding-bottom:56px; }
-header { position:sticky; top:0; z-index:10;
-  background:linear-gradient(180deg, var(--card),
-    color-mix(in srgb,var(--infobg) 35%,var(--card)));
-  border-bottom:2px solid color-mix(in srgb,var(--accent) 30%,var(--line));
-  box-shadow:0 2px 10px rgba(0,0,0,.06);
-  padding:10px 20px; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
-header h1 { font-size:1.05rem; margin:0; letter-spacing:.02em; }
-header .date { color:var(--accent); font-weight:700; }
-nav { margin-left:auto; display:flex; gap:2px; flex-wrap:wrap; }
-nav a { color:var(--muted); text-decoration:none; font-size:.8rem;
-  padding:4px 10px; border-radius:99px; }
-nav a:hover, nav a:focus-visible { background:var(--infobg); color:var(--info); outline:none; }
-nav a.etf-link { background:var(--infobg); color:var(--info); border-radius:99px;
-  padding:3px 12px; font-weight:700; }
-nav a.etf-link:hover, nav a.etf-link:focus-visible { filter:brightness(1.1); }
-main { max-width:1240px; margin:0 auto; padding:18px 16px; }
-.sub { color:var(--muted); font-size:.78rem; margin:2px 0 14px; }
-.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:10px; margin-bottom:18px; }
-.kpi { background:linear-gradient(180deg,
-    color-mix(in srgb,var(--infobg) 45%,var(--card)), var(--card) 65%);
-  border:1px solid var(--line); border-top:3px solid var(--accent);
-  border-radius:10px; padding:12px 14px;
-  box-shadow:0 3px 10px rgba(0,0,0,.07); }
-.kpi.buy { border-top-color:var(--buy);
-  background:linear-gradient(180deg,
-    color-mix(in srgb,var(--buybg) 70%,var(--card)), var(--card) 65%); }
-.kpi.sell { border-top-color:var(--sell);
-  background:linear-gradient(180deg,
-    color-mix(in srgb,var(--sellbg) 70%,var(--card)), var(--card) 65%); }
-.kpi-label { font-size:.72rem; color:var(--muted); letter-spacing:.05em; }
-.kpi-val { font-size:1.55rem; font-weight:700; font-variant-numeric:tabular-nums;
-  margin:2px 0; }
+html, body { margin:0; }
+body { background:var(--bg); color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC",system-ui,-apple-system,sans-serif;
+  line-height:1.5; }
+
+/* ---------- layout ---------- */
+.shell { display:grid; grid-template-columns:var(--sidew) 1fr; min-height:100vh; }
+aside.side { background:var(--side); border-right:1px solid var(--line);
+  position:sticky; top:0; height:100vh; overflow-y:auto; padding:18px 14px;
+  display:flex; flex-direction:column; gap:6px; }
+.brand { display:flex; align-items:center; gap:10px; padding:4px 8px 16px;
+  border-bottom:1px solid var(--line); margin-bottom:10px; }
+.brand .logo { width:36px; height:36px; border-radius:10px; flex:none;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:grid; place-items:center; color:#fff; font-weight:800; font-size:.95rem;
+  box-shadow:0 4px 10px color-mix(in srgb,var(--accent) 35%,transparent); }
+.brand .name { font-weight:800; font-size:.98rem; letter-spacing:.02em; line-height:1.15; }
+.brand .tag { font-size:.68rem; color:var(--muted); }
+.side .group { font-size:.66rem; color:var(--muted); letter-spacing:.12em;
+  text-transform:uppercase; padding:10px 10px 4px; }
+.side a.nav { display:flex; align-items:center; gap:10px; padding:9px 10px;
+  border-radius:9px; color:var(--muted); text-decoration:none; font-size:.86rem;
+  font-weight:600; position:relative; transition:background .15s, color .15s; }
+.side a.nav svg { width:18px; height:18px; flex:none; stroke:currentColor; fill:none;
+  stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.side a.nav:hover { background:color-mix(in srgb,var(--accentbg) 60%,transparent); color:var(--ink); }
+.side a.nav.active { background:var(--accentbg); color:var(--accent); }
+.side a.nav.active::before { content:""; position:absolute; left:-14px; top:8px; bottom:8px;
+  width:4px; border-radius:0 4px 4px 0; background:var(--accent); }
+.side a.sub { display:block; padding:5px 10px 5px 38px; font-size:.78rem; color:var(--muted);
+  text-decoration:none; border-radius:7px; }
+.side a.sub:hover { color:var(--accent); background:color-mix(in srgb,var(--accentbg) 50%,transparent); }
+.side .spacer { flex:1; }
+.side .foot { font-size:.68rem; color:var(--muted); padding:10px 8px 0;
+  border-top:1px solid var(--line); line-height:1.6; }
+.side .foot b { color:var(--ink); }
+
+.mainwrap { min-width:0; }
+.topbar { position:sticky; top:0; z-index:20; height:var(--topbarh);
+  background:color-mix(in srgb,var(--card) 88%,transparent); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px;
+  padding:0 26px; }
+.topbar h1 { margin:0; font-size:1.08rem; font-weight:800; letter-spacing:.01em; }
+.topbar .date { color:var(--accent); font-weight:800; }
+.topbar .crumb { color:var(--muted); font-size:.8rem; }
+.topbar .right { margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.topbar .chipbtn { font-size:.76rem; padding:5px 12px; border-radius:99px;
+  background:var(--accentbg); color:var(--accent); text-decoration:none; font-weight:700;
+  border:1px solid color-mix(in srgb,var(--accent) 20%,transparent); }
+.topbar .chipbtn:hover { filter:brightness(1.05); }
+.topbar .stamp { font-size:.74rem; color:var(--muted); }
+main { padding:22px 26px 60px; max-width:1480px; }
+.sub { color:var(--muted); font-size:.78rem; margin:0 0 16px; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns:1fr; }
+  aside.side { position:static; height:auto; flex-direction:row; flex-wrap:wrap;
+    align-items:center; gap:4px; padding:10px 12px; border-right:none;
+    border-bottom:1px solid var(--line); }
+  .brand { border:none; margin:0 8px 0 0; padding:0; }
+  .side .group, .side .foot, .side .spacer, .side a.sub { display:none; }
+  .side a.nav { padding:7px 10px; }
+  .side a.nav.active::before { display:none; }
+  .topbar { padding:0 14px; }
+  main { padding:16px 14px 50px; }
+}
+
+/* ---------- KPI ---------- */
+.kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:14px; margin-bottom:20px; }
+.kpi { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; box-shadow:var(--shadow); display:grid;
+  grid-template-columns:1fr auto; gap:4px 10px; align-items:start; }
+.kpi .ico { grid-row:1 / span 3; width:38px; height:38px; border-radius:10px;
+  background:var(--accentbg); color:var(--accent); display:grid; place-items:center;
+  font-size:1rem; font-weight:800; }
+.kpi.buy .ico { background:var(--buybg); color:var(--buy); }
+.kpi.sell .ico { background:var(--sellbg); color:var(--sell); }
+.kpi-label { font-size:.72rem; color:var(--muted); letter-spacing:.04em; }
+.kpi-val { font-size:1.55rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.15; }
 .kpi.buy .kpi-val, .kpi-val.buy { color:var(--buy); }
 .kpi.sell .kpi-val, .kpi-val.sell { color:var(--sell); }
 .kpi-sub { font-size:.72rem; color:var(--muted); }
-section { margin-bottom:22px; scroll-margin-top:64px; }
-h2 { font-size:1rem; color:var(--ink); margin:0 0 10px;
-  padding-left:10px; border-left:4px solid var(--accent); }
-.card { background:var(--card); border:1px solid var(--line);
-  border-radius:12px; padding:14px 16px; margin-bottom:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,.05),
-             0 8px 22px color-mix(in srgb,var(--accent) 7%,transparent);
-  transition:transform .15s ease, box-shadow .15s ease; }
-.card:hover { transform:translateY(-2px);
-  box-shadow:0 4px 10px rgba(0,0,0,.08),
-             0 14px 30px color-mix(in srgb,var(--accent) 12%,transparent); }
-@media (prefers-reduced-motion: reduce) {
-  .card, .card:hover { transform:none; transition:none; }
-}
-.card h3 { margin:0 0 8px; font-size:.9rem; }
-.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:12px; }
-.grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:10px; margin-bottom:10px; }
+
+/* ---------- sections / cards ---------- */
+section { margin-bottom:24px; scroll-margin-top:calc(var(--topbarh) + 10px); }
+h2 { font-size:1rem; margin:0 0 12px; display:flex; align-items:center; gap:10px; }
+h2::before { content:""; width:6px; height:18px; border-radius:3px; background:var(--accent); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
+  transition:box-shadow .15s ease, transform .15s ease; }
+.card:hover { box-shadow:var(--shadow-lg); }
+@media (prefers-reduced-motion: reduce) { .card { transition:none; } }
+.card h3 { margin:0 0 10px; font-size:.9rem; font-weight:700; }
+.card h3 .muted { font-weight:400; }
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
+.grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-bottom:10px; }
+@media (max-width: 480px) { .grid2 { grid-template-columns:1fr; } }
 .note { color:var(--muted); font-size:.75rem; margin:0 0 8px; }
 .muted { color:var(--muted); }
-.tag { font-size:.7rem; padding:1px 8px; border-radius:99px; vertical-align:2px; }
-.tag.buy { background:var(--buybg); color:var(--buy); }
-.tag.sell { background:var(--sellbg); color:var(--sell); }
-.bar-list { display:flex; flex-direction:column; gap:8px; }
-.bar-row { display:grid; grid-template-columns:170px 1fr; gap:8px; align-items:center; }
-.bar-label { font-size:.8rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.bar-track { position:relative; height:18px; background:color-mix(in srgb,var(--line) 55%,transparent);
-  border-radius:5px; box-shadow:inset 0 1px 2px rgba(0,0,0,.08); }
-.bar-fill { height:100%; border-radius:5px 3px 3px 5px; min-width:3px;
-  box-shadow:inset 0 -5px 6px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.15); }
-.bar-val { position:absolute; right:6px; top:0; font-size:.72rem; line-height:18px;
-  color:var(--ink); font-variant-numeric:tabular-nums; }
-.bar-val.on-fill { color:var(--onstrong); }
-.bar-sub { grid-column:1/-1; margin-top:-3px; }
-.chip { display:inline-block; font-size:.7rem; background:var(--infobg); color:var(--info);
-  border-radius:99px; padding:1px 8px; margin:2px 4px 0 0; }
-.pill { font-size:.7rem; padding:1px 8px; border-radius:99px; white-space:nowrap; }
-.pill.good { background:var(--goodbg); color:var(--good); }
-.pill.warn { background:var(--warnbg); color:var(--warn); }
-.pill.info { background:var(--infobg); color:var(--info); }
-.pill.muted { background:color-mix(in srgb,var(--line) 60%,transparent); color:var(--muted); }
-.pill.buy { background:var(--buybg); color:var(--buy); font-weight:600; }
-.pill.sell { background:var(--sellbg); color:var(--sell); font-weight:600; }
-.netchip { display:inline-block; min-width:74px; text-align:right;
-  padding:1px 7px; border-radius:5px; font-weight:600; }
 .up { color:var(--buy); font-weight:600; }
 .down { color:var(--sell); font-weight:600; }
+
+/* ---------- pills / chips / tags ---------- */
+.tag { font-size:.7rem; padding:1px 9px; border-radius:99px; vertical-align:2px; font-weight:700; }
+.tag.buy { background:var(--buybg); color:var(--buy); }
+.tag.sell { background:var(--sellbg); color:var(--sell); }
+.pill { font-size:.7rem; padding:1px 9px; border-radius:99px; white-space:nowrap; font-weight:600; }
+.pill.good, .pill.buy { background:var(--goodbg); color:var(--good); }
+.pill.buy { background:var(--buybg); color:var(--buy); }
+.pill.sell { background:var(--sellbg); color:var(--sell); }
+.pill.warn { background:var(--warnbg); color:var(--warn); }
+.pill.info { background:var(--infobg); color:var(--info); }
+.pill.muted, .pill.mutedp { background:color-mix(in srgb,var(--line) 60%,transparent); color:var(--muted); }
+.chip { display:inline-block; font-size:.7rem; background:var(--infobg); color:var(--info);
+  border-radius:99px; padding:1px 8px; margin:2px 4px 0 0; font-weight:600; }
+
+/* ---------- bars ---------- */
+.bar-list { display:flex; flex-direction:column; gap:9px; }
+.bar-row { display:grid; grid-template-columns:170px 1fr; gap:8px; align-items:center; }
+.bar-label { font-size:.8rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bar-track { position:relative; height:18px; border-radius:6px;
+  background:color-mix(in srgb,var(--line) 55%,transparent);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.06); }
+.bar-fill { height:100%; border-radius:6px 4px 4px 6px; min-width:3px;
+  box-shadow:inset 0 -5px 6px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.12); }
+.bar-val { position:absolute; right:6px; top:0; font-size:.72rem; line-height:18px;
+  color:var(--ink); font-variant-numeric:tabular-nums; }
+.bar-val.on-fill { color:#fff; }
+.bar-sub { grid-column:1/-1; margin-top:-3px; }
+@media (prefers-reduced-motion: no-preference) { .bar-fill { transition:width .4s ease; } }
+
+/* ---------- streak cards ---------- */
 .scard { border-left:4px solid var(--buy); }
 .scard-head { display:flex; justify-content:space-between; align-items:center; gap:6px; }
 .scard-body { font-size:.78rem; color:var(--muted); margin-top:6px; }
-.tblwrap { overflow-x:auto; max-height:520px; }
-table { border-collapse:collapse; font-size:.78rem; white-space:nowrap;
+
+/* ---------- filters ---------- */
+.card.filter-card { background:linear-gradient(180deg,
+    color-mix(in srgb,var(--accentbg) 55%,var(--card)), var(--card) 70%);
+  border:1px solid color-mix(in srgb,var(--accent) 24%,var(--line)); }
+.filters { display:grid; gap:12px; align-items:end; }
+.filters label { display:block; font-size:.72rem; font-weight:700; color:var(--accent);
+  letter-spacing:.06em; margin-bottom:5px; }
+.filters select { width:100%; padding:10px 12px; border-radius:9px; font-size:.86rem;
+  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));
+  background:var(--card); color:var(--ink); font-family:inherit;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.06); }
+.filters select:hover { border-color:var(--accent); }
+.filters select:focus { outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent); }
+.filters button { padding:10px 20px; border:none; border-radius:99px; cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
+  font-size:.82rem; font-weight:700; font-family:inherit; letter-spacing:.02em;
+  box-shadow:0 3px 8px color-mix(in srgb,var(--accent) 40%,transparent);
+  transition:transform .12s, box-shadow .12s, filter .12s; }
+.filters button:hover { filter:brightness(1.06); transform:translateY(-1px); }
+.filters button:active { transform:translateY(0); }
+
+/* ---------- tables ---------- */
+.tblwrap { overflow-x:auto; max-height:560px; border-radius:10px; }
+table { border-collapse:separate; border-spacing:0; font-size:.78rem; white-space:nowrap;
   font-variant-numeric:tabular-nums; width:100%; }
-th { text-align:left; padding:6px 10px;
-  border-bottom:2px solid color-mix(in srgb,var(--accent) 25%,var(--line));
-  position:sticky; top:0;
-  background:color-mix(in srgb,var(--infobg) 45%,var(--card)); font-weight:600;
-  color:var(--muted); font-size:.72rem; z-index:1; cursor:pointer;
-  user-select:none; }
+th { text-align:left; padding:8px 10px; position:sticky; top:0; z-index:1;
+  background:color-mix(in srgb,var(--accentbg) 50%,var(--card));
+  border-bottom:2px solid color-mix(in srgb,var(--accent) 22%,var(--line));
+  font-weight:700; color:var(--muted); font-size:.72rem; cursor:pointer; user-select:none; }
 th:hover { color:var(--accent); }
-th .arrow { font-size:.6rem; margin-left:2px; opacity:.7; }
-td { padding:5px 10px; border-bottom:1px solid var(--line); }
+th.num { text-align:right; }
+th .arrow { font-size:.6rem; margin-left:2px; opacity:.8; }
+td { padding:6px 10px; border-bottom:1px solid var(--line); }
 td.num { text-align:right; }
-td.hit { background:var(--hitbg); }
-td.hit strong { color:var(--hit); }
-/* 利多(買進/上漲)= 淺紅、利空(賣出/下跌)= 淺綠 */
-.tint { display:inline-block; padding:1px 7px; border-radius:5px; font-weight:600; }
-.tint.up { background:color-mix(in srgb,var(--buy) 15%,transparent); color:var(--buy); }
-.tint.down { background:color-mix(in srgb,var(--sell) 15%,transparent); color:var(--sell); }
-.tint.flat { background:color-mix(in srgb,var(--line) 55%,transparent); color:var(--muted); }
-tbody tr:hover td { background:color-mix(in srgb,var(--accent) 7%,transparent); }
+tbody tr:hover td { background:color-mix(in srgb,var(--accent) 6%,transparent); }
 td.sticky-col { position:sticky; z-index:2; background:var(--card); }
 th.sticky-col { position:sticky; z-index:4;
-  background:color-mix(in srgb,var(--infobg) 45%,var(--card)); }
-.sticky-col-last { box-shadow:4px 0 6px -3px rgba(0,0,0,.18); }
-tbody tr:hover td.sticky-col { background:color-mix(in srgb,var(--accent) 7%,var(--card)); }
-details summary { cursor:pointer; color:var(--accent); font-size:.8rem; margin:6px 0; }
-footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); font-size:.72rem; }
-@media (prefers-reduced-motion: no-preference) {
-  .bar-fill { transition:width .4s ease; }
-}
+  background:color-mix(in srgb,var(--accentbg) 50%,var(--card)); }
+.sticky-col-last { box-shadow:4px 0 6px -3px rgba(0,0,0,.16); }
+tbody tr:hover td.sticky-col { background:color-mix(in srgb,var(--accent) 6%,var(--card)); }
+td.cell-buy { background:var(--buybg); }
+td.cell-sell { background:var(--sellbg); }
+.etf-code { color:var(--accent); font-weight:700; }
+details summary { cursor:pointer; color:var(--accent); font-size:.8rem; margin:6px 0; font-weight:600; }
+footer.pagefoot { color:var(--muted); font-size:.72rem; margin-top:26px; padding-top:14px;
+  border-top:1px solid var(--line); }
+footer.pagefoot a { color:var(--accent); }
+
+/* ---------- modal ---------- */
+.fund-link { color:var(--accent); cursor:pointer; text-decoration:none; font-weight:600; }
+.fund-link:hover { text-decoration:underline; }
+.modal-bg { position:fixed; inset:0; background:rgba(10,20,18,.5); z-index:60;
+  display:none; align-items:flex-start; justify-content:center; padding:40px 16px;
+  backdrop-filter:blur(2px); }
+.modal-bg.open { display:flex; }
+.modal { background:var(--card); color:var(--ink); border:1px solid var(--line);
+  border-radius:14px; max-width:660px; width:100%; max-height:85vh; overflow-y:auto;
+  padding:20px 22px; box-shadow:var(--shadow-lg); }
+.modal h3 { margin:0 0 2px; font-size:1rem; padding-right:30px; }
+.modal .close { position:sticky; float:right; top:0; border:none; background:var(--accentbg);
+  color:var(--accent); border-radius:99px; width:28px; height:28px; cursor:pointer;
+  font-size:.9rem; font-weight:800; }
+.mstats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px; margin:12px 0; }
+.mstat { background:color-mix(in srgb,var(--accentbg) 55%,var(--card));
+  border:1px solid var(--line); border-radius:10px; padding:8px 10px; }
+.mstat .v { font-size:1.15rem; font-weight:800; font-variant-numeric:tabular-nums; }
+.mstat .l { font-size:.68rem; color:var(--muted); }
+
 </style>
-<header>
-  <h1>台股籌碼日報 <span class="date">2026/08/14</span></h1>
-  <nav>
-    <a href="#overview">總覽</a><a href="#streaks">連續動向</a>
-    <a href="#matrix">投信矩陣</a><a href="#dealer">自營商</a>
-    <a href="#watch">觀察名單</a>
-    <a class="etf-link" href="https://tunglich.github.io/tw-chips-daily/etf.html">ETF 買賣</a>
-    <a class="etf-link" href="https://tunglich.github.io/tw-chips-daily/topten.html">基金前十大</a>
-  </nav>
-</header>
+</head>
+<body>
+<div class="shell">
+<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="sub" href="#overview">總覽</a><a class="sub" href="#streaks">連續動向</a><a class="sub" href="#matrix">投信矩陣</a><a class="sub" href="#dealer">自營商</a><a class="sub" href="#watch">觀察名單</a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><div class="spacer"></div><div class="foot"><b>資料</b>:FinLab · CMoney PCF · SITCA · TDCC<br>歸屬為推測 · 情報平台,非投資建議</div></aside>
+<div class="mainwrap">
+<div class="topbar">
+  <h1>籌碼日報 <span class="date">2026/08/14</span></h1>
+  <span class="crumb">投信主動基金歸屬 · 自營商 · 分點觀察</span>
+  <div class="right"><span class="stamp">產生於 2026-08-15 17:45</span></div>
+</div>
 <main>
-<p class="sub">投信主動基金歸屬(已扣 ETF)· 產生於 2026-08-14 22:06 · 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
-<div class="kpis"><div class="kpi buy"><div class="kpi-label">主動買超金額</div><div class="kpi-val">193.0</div><div class="kpi-sub">億元</div></div><div class="kpi sell"><div class="kpi-label">主動賣超金額</div><div class="kpi-val">110.2</div><div class="kpi-sub">億元</div></div><div class="kpi "><div class="kpi-label">投信連買 ≥2日</div><div class="kpi-val">43</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="kpi-label">其中連 3 日</div><div class="kpi-val">26</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="kpi-label">觀察名單</div><div class="kpi-val">12</div><div class="kpi-sub">3 檔仍在買</div></div><div class="kpi "><div class="kpi-label">自營高信心歸屬</div><div class="kpi-val">9</div><div class="kpi-sub">檔</div></div></div>
+<p class="sub">投信主動基金歸屬(已扣 ETF)· 產生於 2026-08-15 17:45 · 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
+<div class="kpis"><div class="kpi buy"><div class="ico">買</div><div class="kpi-label">主動買超金額</div><div class="kpi-val">193.0</div><div class="kpi-sub">億元</div></div><div class="kpi sell"><div class="ico">賣</div><div class="kpi-label">主動賣超金額</div><div class="kpi-val">110.2</div><div class="kpi-sub">億元</div></div><div class="kpi "><div class="ico">連</div><div class="kpi-label">投信連買 ≥2日</div><div class="kpi-val">43</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="ico">3</div><div class="kpi-label">其中連 3 日</div><div class="kpi-val">26</div><div class="kpi-sub">組合</div></div><div class="kpi "><div class="ico">觀</div><div class="kpi-label">觀察名單</div><div class="kpi-val">12</div><div class="kpi-sub">3 檔仍在買</div></div><div class="kpi "><div class="ico">自</div><div class="kpi-label">自營高信心歸屬</div><div class="kpi-val">9</div><div class="kpi-sub">檔</div></div></div>
 
 <section id="overview"><h2>總覽 — 主動金額 Top 8</h2>
 <div class="grid2">
@@ -191,14 +285,18 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
 <p class="note"><strong>觀察名單產生器,非跟單清單</strong>(walk-forward 檢驗:歷史勝率不具持續性)。
 判讀:千張大戶Δ 上升 = 真吸籌;協同分點 = 同一大戶的其他已知帳戶(量要合計看)。</p>
 <div class="card"><div class="tblwrap"><table data-sticky="2"><thead><tr><th>代號</th><th>名稱</th><th>分點</th><th>歷史次數</th><th>勝率</th><th>score</th><th>近月買(張)</th><th>日數</th><th>首買</th><th>末買</th><th>均價</th><th>現價</th><th>報酬</th><th>千張大戶%</th><th>千張大戶Δ4週</th><th>協同分點</th><th>狀態</th></tr></thead><tbody><tr><td class="num">5475</td><td>德宏</td><td>兆豐證券</td><td class="num">14</td><td class="num">93%</td><td class="num">0.324</td><td class="num">130</td><td class="num">1</td><td>2026-08-11</td><td>2026-08-11</td><td class="num">135.0</td><td class="num">170.5</td><td><span class="tint up">+26.3%</span></td><td class="num">35.17</td><td><span class="up">+1.2pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">2880</td><td>華南金</td><td>富邦-永和</td><td class="num">13</td><td class="num">100%</td><td class="num">0.277</td><td class="num">1,416</td><td class="num">2</td><td>2026-08-12</td><td>2026-08-13</td><td class="num">39.79</td><td class="num">38.95</td><td><span class="tint down">-2.1%</span></td><td class="num">79.53</td><td><span class="up">+0.5pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">8932</td><td>智通*</td><td>富邦證券</td><td class="num">16</td><td class="num">88%</td><td class="num">0.268</td><td class="num">106</td><td class="num">1</td><td>2026-08-14</td><td>2026-08-14</td><td class="num">108.0</td><td class="num">108.0</td><td><span class="tint flat">0.0%</span></td><td class="num">75.42</td><td><span class="down">-0.1pp</span></td><td></td><td><span class="pill good">仍在買</span></td></tr><tr><td class="num">8932</td><td>智通*</td><td>凱基</td><td class="num">21</td><td class="num">90%</td><td class="num">0.262</td><td class="num">530</td><td class="num">2</td><td>2026-07-16</td><td>2026-07-29</td><td class="num">100.07</td><td class="num">108.0</td><td><span class="tint up">+7.9%</span></td><td class="num">75.42</td><td><span class="down">-0.1pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">2388</td><td>威盛</td><td>群益金鼎-內湖</td><td class="num">15</td><td class="num">93%</td><td class="num">0.246</td><td class="num">10,027</td><td class="num">23</td><td>2026-07-15</td><td>2026-08-14</td><td class="num">74.07</td><td class="num">76.1</td><td><span class="tint up">+2.7%</span></td><td class="num">68.4</td><td><span class="up">+3.8pp</span></td><td></td><td><span class="pill good">仍在買</span></td></tr><tr><td class="num">5876</td><td>上海商銀</td><td>新光-台中</td><td class="num">10</td><td class="num">100%</td><td class="num">0.222</td><td class="num">292</td><td class="num">2</td><td>2026-07-22</td><td>2026-07-23</td><td class="num">44.91</td><td class="num">42.35</td><td><span class="tint down">-5.7%</span></td><td class="num">82.7</td><td><span class="up">+1.5pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">2891</td><td>中信金</td><td>台新-台北</td><td class="num">11</td><td class="num">91%</td><td class="num">0.208</td><td class="num">516</td><td class="num">1</td><td>2026-08-04</td><td>2026-08-04</td><td class="num">64.8</td><td class="num">65.8</td><td><span class="tint up">+1.5%</span></td><td class="num">79.0</td><td><span class="down">-0.5pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">8021</td><td>尖點</td><td>統一</td><td class="num">58</td><td class="num">71%</td><td class="num">0.203</td><td class="num">286</td><td class="num">1</td><td>2026-08-07</td><td>2026-08-07</td><td class="num">395.0</td><td class="num">434.0</td><td><span class="tint up">+9.9%</span></td><td class="num">35.82</td><td><span class="down">-2.0pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">2015</td><td>豐興</td><td>永豐金證券</td><td class="num">32</td><td class="num">84%</td><td class="num">0.182</td><td class="num">107</td><td class="num">1</td><td>2026-07-17</td><td>2026-07-17</td><td class="num">63.7</td><td class="num">62.4</td><td><span class="tint down">-2.0%</span></td><td class="num">81.97</td><td><span class="up">+0.2pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">3702</td><td>大聯大</td><td>華南永昌-中正</td><td class="num">13</td><td class="num">85%</td><td class="num">0.157</td><td class="num">5,643</td><td class="num">8</td><td>2026-07-16</td><td>2026-08-14</td><td class="num">110.6</td><td class="num">115.0</td><td><span class="tint up">+4.0%</span></td><td class="num">80.06</td><td><span class="up">+1.1pp</span></td><td></td><td><span class="pill good">仍在買</span></td></tr><tr><td class="num">2633</td><td>台灣高鐵</td><td>宏遠證券</td><td class="num">8</td><td class="num">100%</td><td class="num">0.155</td><td class="num">116</td><td class="num">1</td><td>2026-07-23</td><td>2026-07-23</td><td class="num">25.95</td><td class="num">25.9</td><td><span class="tint down">-0.2%</span></td><td class="num">84.98</td><td><span class="up">+0.5pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr><tr><td class="num">2881</td><td>富邦金</td><td>台新-台北</td><td class="num">28</td><td class="num">79%</td><td class="num">0.15</td><td class="num">150</td><td class="num">1</td><td>2026-07-23</td><td>2026-07-23</td><td class="num">128.5</td><td class="num">129.5</td><td><span class="tint up">+0.8%</span></td><td class="num">84.28</td><td><span class="up">+0.1pp</span></td><td></td><td><span class="pill info">持有中</span></td></tr></tbody></table></div></div></section>
-</main>
-<footer>方法與實證:REPORT.md(進場價審計 · walk-forward 檢驗 · 關聯分點聚類)·
+<footer class="pagefoot">方法與實證:REPORT.md(進場價審計 · walk-forward 檢驗 · 關聯分點聚類)·
 勝率鐵律:扣日期配對基準率 / 次日開盤定價 / 警惕選擇偏差 · 紅=買方、綠=賣方(台股慣例)
 · 點表頭可排序</footer>
+
+</main>
+</div>
+</div>
 <script>
 (function () {
-  function stickyCols() {
-    document.querySelectorAll("table[data-sticky]").forEach(function (tb) {
+  // ---- 凍結欄(table[data-sticky=N]) ----
+  function stickyCols(root) {
+    (root || document).querySelectorAll("table[data-sticky]").forEach(function (tb) {
       var n = parseInt(tb.dataset.sticky) || 0;
       if (!n) return;
       var first = tb.querySelector("tr");
@@ -218,52 +316,81 @@ footer { max-width:1240px; margin:0 auto; padding:0 16px; color:var(--muted); fo
       });
     });
   }
+  window.__stickyCols = stickyCols;
   window.addEventListener("resize", function () {
     clearTimeout(window.__stickyT);
-    window.__stickyT = setTimeout(stickyCols, 150);
+    window.__stickyT = setTimeout(function () { stickyCols(); }, 150);
   });
   document.querySelectorAll("details").forEach(function (d) {
-    d.addEventListener("toggle", stickyCols);
+    d.addEventListener("toggle", function () { stickyCols(); });
   });
-  window.__stickyCols = stickyCols;
-  stickyCols();
 
+  // ---- 表頭排序 ----
   function cellVal(td) {
     var t = (td.textContent || "").trim();
     if (!t) return { n: null, s: "" };
-    var m = t.replace(/,/g, "").replace(/[%億張]/g, "").replace(/\*$/, "")
-             .replace(/pp$/, "");
+    var m = t.replace(/,/g, "").replace(/[%億張+]/g, "").replace(/\*$/, "").replace(/pp$/, "");
     var n = parseFloat(m);
     return isNaN(n) ? { n: null, s: t } : { n: n, s: t };
   }
-  document.querySelectorAll("table").forEach(function (tb) {
-    var ths = tb.querySelectorAll("thead th");
-    ths.forEach(function (th, ci) {
-      th.title = "點擊排序";
-      th.addEventListener("click", function () {
-        var body = tb.querySelector("tbody");
-        var rows = Array.prototype.slice.call(body.querySelectorAll("tr"));
-        var dir = th.dataset.dir === "desc" ? "asc" : "desc";
-        ths.forEach(function (h) {
-          delete h.dataset.dir;
-          var a = h.querySelector(".arrow"); if (a) a.remove();
+  function hookSort(root) {
+    (root || document).querySelectorAll("table").forEach(function (tb) {
+      if (tb.dataset.sortHooked) return;
+      tb.dataset.sortHooked = "1";
+      var ths = tb.querySelectorAll("thead th");
+      ths.forEach(function (th, ci) {
+        th.title = "點擊排序";
+        th.addEventListener("click", function () {
+          var body = tb.querySelector("tbody");
+          var rows = Array.prototype.slice.call(body.querySelectorAll("tr"));
+          var dir = th.dataset.dir === "desc" ? "asc" : "desc";
+          ths.forEach(function (h) {
+            delete h.dataset.dir;
+            var a = h.querySelector(".arrow"); if (a) a.remove();
+          });
+          th.dataset.dir = dir;
+          var ar = document.createElement("span");
+          ar.className = "arrow"; ar.textContent = dir === "desc" ? "▼" : "▲";
+          th.appendChild(ar);
+          rows.sort(function (r1, r2) {
+            var a = cellVal(r1.children[ci]), b = cellVal(r2.children[ci]);
+            var cmp;
+            if (a.n !== null && b.n !== null) cmp = a.n - b.n;
+            else if (a.n !== null) cmp = 1;
+            else if (b.n !== null) cmp = -1;
+            else cmp = a.s.localeCompare(b.s, "zh-Hant");
+            return dir === "desc" ? -cmp : cmp;
+          });
+          rows.forEach(function (r) { body.appendChild(r); });
         });
-        th.dataset.dir = dir;
-        var ar = document.createElement("span");
-        ar.className = "arrow"; ar.textContent = dir === "desc" ? "▼" : "▲";
-        th.appendChild(ar);
-        rows.sort(function (r1, r2) {
-          var a = cellVal(r1.children[ci]), b = cellVal(r2.children[ci]);
-          var cmp;
-          if (a.n !== null && b.n !== null) cmp = a.n - b.n;
-          else if (a.n !== null) cmp = 1;
-          else if (b.n !== null) cmp = -1;
-          else cmp = a.s.localeCompare(b.s, "zh-Hant");
-          return dir === "desc" ? -cmp : cmp;
-        });
-        rows.forEach(function (r) { body.appendChild(r); });
       });
     });
-  });
+  }
+  window.__hookSort = hookSort;
+
+  // ---- sidebar 次選單:捲動時高亮目前區段 ----
+  var subs = document.querySelectorAll(".side a.sub[href^='#']");
+  if (subs.length && "IntersectionObserver" in window) {
+    var map = {};
+    subs.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && map[e.target.id]) {
+          subs.forEach(function (a) { a.style.color = ""; a.style.fontWeight = ""; });
+          map[e.target.id].style.color = "var(--accent)";
+          map[e.target.id].style.fontWeight = "700";
+        }
+      });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    Object.keys(map).forEach(function (id) {
+      var el = document.getElementById(id); if (el) io.observe(el);
+    });
+  }
+
+  hookSort();
+  stickyCols();
 })();
 </script>
+
+</body>
+</html>
