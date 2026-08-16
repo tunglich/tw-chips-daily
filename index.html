@@ -104,7 +104,9 @@ tr.wl-hit td { background:color-mix(in srgb,var(--accentbg) 45%,transparent); }
 .wl-digest .wl-item { display:flex; gap:10px; align-items:baseline; padding:6px 0; border-bottom:1px dashed var(--line); font-size:.82rem; flex-wrap:wrap; }
 .wl-digest .wl-item:last-child { border-bottom:none; }
 .wl-digest .wl-item b a { color:var(--accent); text-decoration:none; }
-.wl-digest .wl-item .src { font-size:.68rem; color:var(--muted); background:var(--infobg); border-radius:99px; padding:0 7px; }
+.wl-digest .wl-item .src { font-size:.68rem; color:var(--info); background:var(--infobg); border-radius:99px; padding:0 7px; font-weight:600; white-space:nowrap; }
+.wl-digest .wl-item .src.buy { color:var(--buy); background:var(--buybg); }
+.wl-digest .wl-item .src.sell { color:var(--sell); background:var(--sellbg); }
 
 .mainwrap { min-width:0; }
 .topbar { position:sticky; top:0; z-index:20; height:var(--topbarh);
@@ -280,12 +282,12 @@ footer.pagefoot a { color:var(--accent); }
 </head>
 <body>
 <div class="shell">
-<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/index.html?v=202608152315"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="sub" href="#overview">總覽</a><a class="sub" href="#streaks">連續動向</a><a class="sub" href="#matrix">投信矩陣</a><a class="sub" href="#dealer">自營商</a><a class="sub" href="#watch">觀察名單</a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html?v=202608152315"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html?v=202608152315"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/stock.html?v=202608152315"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/whales.html?v=202608152315"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><div class="wl" id="wl"><div class="wl-h"><span>自選股</span><span id="wl-n" class="muted"></span></div><div class="wl-add"><input id="wl-in" placeholder="代號,如 2330" maxlength="6"><button id="wl-btn" type="button">＋</button></div><ul id="wl-list"></ul><div class="wl-empty" id="wl-empty">尚未加入。表格中的自選股會高亮,日報頂部有異動摘要。</div></div><div class="spacer"></div><div class="foot"><b>資料</b>:FinLab · CMoney PCF · SITCA · TDCC<br>歸屬為推測 · 情報平台,非投資建議</div></aside>
+<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/index.html?v=202608161358"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="sub" href="#overview">總覽</a><a class="sub" href="#streaks">連續動向</a><a class="sub" href="#matrix">投信矩陣</a><a class="sub" href="#dealer">自營商</a><a class="sub" href="#watch">觀察名單</a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html?v=202608161358"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html?v=202608161358"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/stock.html?v=202608161358"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/whales.html?v=202608161358"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><div class="wl" id="wl"><div class="wl-h"><span>自選股</span><span id="wl-n" class="muted"></span></div><div class="wl-add"><input id="wl-in" placeholder="代號,如 2330" maxlength="6"><button id="wl-btn" type="button">＋</button></div><ul id="wl-list"></ul><div class="wl-empty" id="wl-empty">尚未加入。表格中的自選股會高亮,日報頂部有異動摘要。</div></div><div class="spacer"></div><div class="foot"><b>資料</b>:FinLab · CMoney PCF · SITCA · TDCC<br>歸屬為推測 · 情報平台,非投資建議</div></aside>
 <div class="mainwrap">
 <div class="topbar">
   <h1>籌碼日報 <span class="date">2026/08/14</span></h1>
   <span class="crumb">投信主動基金歸屬 · 自營商 · 分點觀察</span>
-  <div class="right"><span class="stamp">產生於 2026-08-15 23:15</span></div>
+  <div class="right"><span class="stamp">產生於 2026-08-16 13:58</span></div>
 </div>
 <main>
 <p class="sub">投信主動基金歸屬(已扣 ETF)· 歸屬為推測(OOS precision ≈0.52)· 情報平台,非投資建議</p>
@@ -480,19 +482,33 @@ footer.pagefoot a { color:var(--accent); }
     var box = document.getElementById("wl-digest"); if (!box) return;
     var set = {}; wlGet().forEach(function (s) { set[s] = 1; });
     var items = [];
+    // 方向判定:表頭有「方向」欄 → 讀該格(買/賣/連買/連賣);否則看所屬卡片 h3 的 tag(買超/賣超矩陣)
+    function rowSide(tr, tb) {
+      var ths = tb.querySelectorAll("thead th"), di = -1;
+      for (var i = 0; i < ths.length; i++) if ((ths[i].textContent || "").trim() === "方向") { di = i; break; }
+      if (di >= 0 && tr.children[di]) {
+        var t = (tr.children[di].textContent || "");
+        if (/買/.test(t)) return "buy"; if (/賣/.test(t)) return "sell";
+      }
+      var card = tb.closest(".card"); var tag = card ? card.querySelector("h3 .tag") : null;
+      if (tag) { if (tag.classList.contains("buy")) return "buy"; if (tag.classList.contains("sell")) return "sell"; }
+      return "";
+    }
     document.querySelectorAll("section").forEach(function (sec) {
       var h = sec.querySelector("h2"); var title = h ? h.textContent.trim().split(" ")[0].replace(/[—(].*$/, "") : "";
-      sec.querySelectorAll("table tbody tr").forEach(function (tr) {
-        var r = rowSid(tr); if (!r || !set[r.sid]) return;
-        var cells = Array.prototype.map.call(tr.children, function (td) { return (td.textContent || "").trim(); })
-                     .filter(function (t, i) { return t && i !== 0; }).slice(0, 5).join(" · ");
-        items.push({ sid: r.sid, name: r.name, src: title, txt: cells });
+      sec.querySelectorAll("table").forEach(function (tb) {
+        tb.querySelectorAll("tbody tr").forEach(function (tr) {
+          var r = rowSid(tr); if (!r || !set[r.sid]) return;
+          var cells = Array.prototype.map.call(tr.children, function (td) { return (td.textContent || "").trim(); })
+                       .filter(function (t, i) { return t && i !== 0; }).slice(0, 5).join(" · ");
+          items.push({ sid: r.sid, name: r.name, src: title, txt: cells, side: rowSide(tr, tb) });
+        });
       });
-      // 連續動向卡片
+      // 連續動向卡片(卡片只列連買)
       sec.querySelectorAll(".scard").forEach(function (c) {
         var b = c.querySelector("b"); if (!b) return;
         var m = (b.textContent || "").match(/^(\d{4})\s*(\S*)/); if (!m || !set[m[1]]) return;
-        items.push({ sid: m[1], name: m[2], src: "連續動向", txt: (c.querySelector(".scard-body") || {}).textContent || "" });
+        items.push({ sid: m[1], name: m[2], src: "連續動向", txt: (c.querySelector(".scard-body") || {}).textContent || "", side: "buy" });
       });
     });
     var list = wlGet();
@@ -501,8 +517,10 @@ footer.pagefoot a { color:var(--accent); }
     var body = box.querySelector(".wl-digest");
     if (!items.length) { body.innerHTML = '<div class="muted" style="font-size:.8rem">自選股今日未出現在任何區段(無歸屬旗標 / 連續動向 / 觀察名單 / 內部人事件)。</div>'; return; }
     body.innerHTML = items.slice(0, 40).map(function (it) {
+      var sc = it.side === "buy" ? " buy" : it.side === "sell" ? " sell" : "";
+      var lab = it.src + (it.side === "buy" ? " · 買" : it.side === "sell" ? " · 賣" : "");
       return '<div class="wl-item"><b><a href="' + SITE + 'stock.html#' + it.sid + '">' + it.sid + ' ' + (it.name || "") + '</a></b>' +
-             '<span class="src">' + it.src + '</span><span>' + it.txt.replace(/\s+/g, " ").slice(0, 160) + '</span></div>';
+             '<span class="src' + sc + '">' + lab + '</span><span>' + it.txt.replace(/\s+/g, " ").slice(0, 160) + '</span></div>';
     }).join("");
   }
   var wlBtn = document.getElementById("wl-btn"), wlIn = document.getElementById("wl-in");
