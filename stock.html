@@ -313,6 +313,8 @@ footer.pagefoot a { color:var(--accent); }
 .tl .d { color:var(--muted); font-variant-numeric:tabular-nums; margin-right:8px; }
 .tl .kind { font-size:.68rem; padding:0 7px; border-radius:99px; margin-right:6px; font-weight:700; }
 .tl .kind.attr { background:var(--infobg); color:var(--info); }
+.tl .kind.attr-buy { background:var(--buybg); color:var(--buy); }
+.tl .kind.attr-sell { background:var(--sellbg); color:var(--sell); }
 .tl .kind.val { background:var(--goodbg); color:var(--good); }
 .tl .kind.whale { background:var(--buybg); color:var(--buy); }
 .tl .kind.tt { background:#efe6f7; color:#6b3fa0; }
@@ -321,12 +323,12 @@ footer.pagefoot a { color:var(--accent); }
 </head>
 <body>
 <div class="shell">
-<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav" href="https://tunglich.github.io/tw-chips-daily/index.html?v=202608172155"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html?v=202608172155"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html?v=202608172155"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/stock.html?v=202608172155"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="sub" href="#query">查詢</a><a class="sub" href="#summary">摘要</a><a class="sub" href="#chart">K 線與法人</a><a class="sub" href="#timeline">事件時間軸</a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/whales.html?v=202608172155"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><div class="wl" id="wl"><div class="wl-h"><span>自選股</span><span id="wl-n" class="muted"></span></div><div class="wl-add"><input id="wl-in" placeholder="代號,如 2330" maxlength="6"><button id="wl-btn" type="button">＋</button></div><ul id="wl-list"></ul><div class="wl-empty" id="wl-empty">尚未加入。表格中的自選股會高亮,日報頂部有異動摘要。</div></div><div class="spacer"></div><div class="foot"><b>資料</b>:FinLab 日 K / 三大法人<br>歸屬 = 每日排程快照</div></aside>
+<aside class="side"><div class="brand"><div class="logo">籌</div><div><div class="name">台股籌碼日報</div><div class="tag">Chips Intelligence</div></div></div><div class="group">功能</div><a class="nav" href="https://tunglich.github.io/tw-chips-daily/index.html?v=202608172206"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4v8H3zM10 3h4v18h-4zM17 8h4v13h-4z"/></svg><span>籌碼日報</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/etf.html?v=202608172206"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>ETF 買賣</span></a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/topten.html?v=202608172206"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 .9-4.5 4.3L17.6 20 12 16.9 6.4 20l1.1-6.8L3 8.9 9 8z"/></svg><span>基金前十大</span></a><a class="nav active" href="https://tunglich.github.io/tw-chips-daily/stock.html?v=202608172206"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 5-7 4 4M3 21h18"/></svg><span>個股籌碼</span></a><a class="sub" href="#query">查詢</a><a class="sub" href="#summary">摘要</a><a class="sub" href="#chart">K 線與法人</a><a class="sub" href="#timeline">事件時間軸</a><a class="nav" href="https://tunglich.github.io/tw-chips-daily/whales.html?v=202608172206"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a4 4 0 110 8 4 4 0 010-8zM4 21a8 8 0 0116 0"/></svg><span>大戶趨勢</span></a><div class="wl" id="wl"><div class="wl-h"><span>自選股</span><span id="wl-n" class="muted"></span></div><div class="wl-add"><input id="wl-in" placeholder="代號,如 2330" maxlength="6"><button id="wl-btn" type="button">＋</button></div><ul id="wl-list"></ul><div class="wl-empty" id="wl-empty">尚未加入。表格中的自選股會高亮,日報頂部有異動摘要。</div></div><div class="spacer"></div><div class="foot"><b>資料</b>:FinLab 日 K / 三大法人<br>歸屬 = 每日排程快照</div></aside>
 <div class="mainwrap">
 <div class="topbar">
   <h1>個股籌碼 <span class="date">2026/08/17</span></h1>
   <span class="crumb">K 線 · 三大法人買賣超 · 投信/自營歸屬</span>
-  <div class="right"><span class="stamp">產生於 2026-08-17 21:55</span></div>
+  <div class="right"><span class="stamp">產生於 2026-08-17 22:06</span></div>
 </div>
 <main>
 <p class="sub">輸入代號或名稱 → K 線(含 MA5/20/60 與成交量)+ 三大法人逐日買賣超 + 融資/融券/借券賣出餘額增減 ·
@@ -834,7 +836,9 @@ function timeline() {
     let t = "";
     if (buys.length) t += `推測買:${buys.join("、")}`;
     if (sells.length) t += (t ? " · " : "") + `推測賣:${sells.join("、")}`;
-    evs.push({k: dates[i], cls: "attr", kind: "歸屬", kcls: "attr", txt: t});
+    // 買方旗標 = 淺紅、賣方 = 淺綠(台股慣例);同日買賣都有則維持中性底色
+    const kc = buys.length && sells.length ? "attr" : (buys.length ? "attr-buy" : "attr-sell");
+    evs.push({k: dates[i], cls: "attr", kind: "歸屬", kcls: kc, txt: t});
   }
   // 月報驗證
   (D.val[id] || []).forEach(([m, inst, side, hit]) => {
