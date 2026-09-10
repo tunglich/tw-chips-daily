@@ -879,7 +879,7 @@ document.addEventListener("keydown", ev => {
 
 selM.addEventListener("change", render);
 selC.addEventListener("change", () => { selS.value = ""; render(); });
-selS.addEventListener("change", render);
+selS.addEventListener("change", () => { if (selS.value) selC.value = ""; render(); });
 document.getElementById("btn-clear").addEventListener("click", () => {
   selC.value = ""; selS.value = ""; render();
 });
