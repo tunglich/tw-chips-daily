@@ -62,7 +62,7 @@ aside.side { background:var(--side); border-right:1px solid var(--line);
 .side .foot b { color:var(--ink); }
 /* ---------- 自選股(localStorage) ---------- */
 .wl { border-top:1px solid var(--line); margin-top:6px; padding:8px 6px 2px; }
-.wl .wl-h { font-size:.62rem; color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
+.wl .wl-h { font-size:.62rem; color:var(--gold); letter-spacing:.12em; text-transform:uppercase;
   padding:0 4px 4px; display:flex; justify-content:space-between; align-items:center; }
 .wl .wl-add { display:flex; gap:4px; padding:0 2px 4px; }
 .wl .wl-add input { flex:1; min-width:0; padding:5px 8px; font-size:.76rem; border:1px solid var(--line);
@@ -87,7 +87,8 @@ tr.wl-hit td { background:color-mix(in srgb,var(--accentbg) 45%,transparent); }
 .wl-digest .wl-item .src.sell { color:var(--sell); background:var(--sellbg); }
 /* ---------- 自選股快速卡 ---------- */
 .qk-head { display:flex; align-items:baseline; gap:10px; padding-right:26px; }
-.qk-head .px { font-size:1.35rem; font-weight:800; font-variant-numeric:tabular-nums; }
+.qk-head .px { font-size:1.35rem; font-weight:800; font-variant-numeric:tabular-nums;
+  color:var(--gold); }
 .qk-rows { margin:12px 0 4px; }
 .qk-row { display:flex; justify-content:space-between; gap:12px; padding:5px 2px;
   border-bottom:1px dashed var(--line); font-size:.82rem; }
@@ -150,6 +151,8 @@ main > .sub, p.sub { color:var(--muted); font-size:.78rem; margin:0 0 16px; }
 .kpi.orange { border-left-color:var(--orange); }
 .kpi.gold .kpi-val { color:var(--gold); }
 .kpi.orange .kpi-val { color:var(--orange); }
+/* 中性 KPI 數字一律金色(2026-09-11 使用者指定加強金色;買賣卡仍紅/綠) */
+.kpi:not(.buy):not(.sell):not(.orange):not(.gold) .kpi-val { color:var(--gold); }
 /* 中性 KPI 卡左框輪替暖色(買/賣卡不受影響),整排不再單一色 */
 .kpi:not(.buy):not(.sell):not(.gold):not(.orange):nth-child(3n) { border-left-color:var(--gold); }
 .kpi:not(.buy):not(.sell):not(.gold):not(.orange):nth-child(3n+2) { border-left-color:var(--orange); }
@@ -158,7 +161,7 @@ main > .sub, p.sub { color:var(--muted); font-size:.78rem; margin:0 0 16px; }
 section { margin-bottom:24px; scroll-margin-top:calc(var(--topbarh) + 10px); }
 h2 { font-size:1rem; margin:0 0 12px; display:flex; align-items:center; gap:10px; }
 h2::before { content:""; width:6px; height:18px; border-radius:3px;
-  background:linear-gradient(180deg,var(--accent) 45%,var(--gold)); }
+  background:var(--gold); }
 .card { background:var(--card); border:1px solid var(--line); border-radius:14px;
   padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
   transition:box-shadow .15s ease, transform .15s ease; }
@@ -224,7 +227,7 @@ h2::before { content:""; width:6px; height:18px; border-radius:3px;
     color-mix(in srgb,var(--accentbg) 55%,var(--card)), var(--card) 70%);
   border:1px solid color-mix(in srgb,var(--accent) 24%,var(--line)); }
 .filters { display:grid; gap:12px; align-items:end; }
-.filters label { display:block; font-size:.72rem; font-weight:700; color:var(--accent);
+.filters label { display:block; font-size:.72rem; font-weight:700; color:var(--gold);
   letter-spacing:.06em; margin-bottom:5px; }
 .filters select, .filters input { width:100%; padding:10px 12px; border-radius:9px; font-size:.86rem;
   border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));
@@ -255,7 +258,7 @@ th { text-align:left; padding:8px 10px; position:sticky; top:0; z-index:1;
   background:color-mix(in srgb,var(--accentbg) 50%,var(--card));
   border-bottom:2px solid color-mix(in srgb,var(--accent) 22%,var(--line));
   font-weight:700; color:var(--muted); font-size:.72rem; cursor:pointer; user-select:none; }
-th:hover { color:var(--accent); }
+th:hover { color:var(--gold); }
 th.num { text-align:right; }
 th .arrow { font-size:.6rem; margin-left:2px; opacity:.8; }
 td { padding:6px 10px; border-bottom:1px solid var(--line); }
