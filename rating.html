@@ -477,6 +477,17 @@ window.__STOCK_NAMES = {"1101":"台泥","1102":"亞泥","1103":"嘉泥","1104":"
   }
   window.__hookSort = hookSort;
 
+  // ---- sidebar 連結快取參數改為動態（10 分鐘一值，對齊 Pages max-age=600）----
+  (function () {
+    var b = Math.floor(Date.now() / 600000);
+    document.querySelectorAll("aside.side a.nav").forEach(function (a) {
+      try {
+        var u = new URL(a.href, location.href);
+        if (u.searchParams.has("v")) { u.searchParams.set("v", b); a.href = u.href; }
+      } catch (e) {}
+    });
+  })();
+
   // ---- sidebar 次選單:捲動時高亮目前區段 ----
   var subs = document.querySelectorAll(".side a.sub[href^='#']");
   if (subs.length && "IntersectionObserver" in window) {
