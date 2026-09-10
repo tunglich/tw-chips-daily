@@ -15,6 +15,7 @@
   --good:#20714f; --goodbg:#e8f2ed; --warn:#8a5f00; --warnbg:#f7efdc;
   --info:#0f6e5c; --infobg:#e4f3ee; --hitbg:#e2eef3; --hit:#0f4c60;
   --onstrong:#ffffff;
+  --orange:#c05621; --orangebg:#fbeee3; --gold:#8f6b10; --goldbg:#f8f1dc;
   --shadow:0 1px 2px rgba(16,24,40,.04), 0 6px 18px rgba(16,24,40,.06);
   --shadow-lg:0 4px 8px rgba(16,24,40,.06), 0 16px 36px rgba(16,24,40,.10);
 }
@@ -28,6 +29,7 @@
     --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
     --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
     --onstrong:#0f1517;
+    --orange:#e8945e; --orangebg:#3a2a1c; --gold:#e2c069; --goldbg:#352d16;
     --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
     --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
   }
@@ -41,6 +43,7 @@
   --good:#5cba8f; --goodbg:#1d3229; --warn:#dcb45e; --warnbg:#37301d;
   --info:#4fc3a8; --infobg:#173129; --hitbg:#1c2f36; --hit:#8fd0e5;
   --onstrong:#0f1517;
+  --orange:#e8945e; --orangebg:#3a2a1c; --gold:#e2c069; --goldbg:#352d16;
   --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
   --shadow-lg:0 4px 8px rgba(0,0,0,.35), 0 16px 36px rgba(0,0,0,.45);
 }
@@ -60,11 +63,11 @@ aside.side { background:var(--side); border-right:1px solid var(--line);
 .brand svg.logo { width:30px; height:30px; flex:none; display:block; }
 .brand svg.logo .fr { stroke:color-mix(in srgb,var(--accent) 40%,var(--line)); }
 .brand svg.logo .sig { stroke:var(--accent); }
-.brand svg.logo .dot { fill:var(--accent); }
+.brand svg.logo .dot { fill:var(--gold); }
 .brand .name { font-weight:700; font-size:.95rem; letter-spacing:.04em; line-height:1.2; }
 .brand .tag { font-size:.56rem; color:var(--muted); letter-spacing:.22em;
   text-transform:uppercase; margin-top:2px; white-space:nowrap; }
-.side .group { font-size:.62rem; color:var(--muted); letter-spacing:.12em;
+.side .group { font-size:.62rem; color:var(--gold); letter-spacing:.12em;
   text-transform:uppercase; padding:6px 10px 2px; }
 .side a.nav { display:flex; align-items:center; gap:9px; padding:6px 10px;
   border-radius:8px; color:var(--muted); text-decoration:none; font-size:.84rem;
@@ -129,7 +132,7 @@ tr.wl-hit td { background:color-mix(in srgb,var(--accentbg) 45%,transparent); }
   border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px;
   padding:0 26px; }
 .topbar h1 { margin:0; font-size:1.08rem; font-weight:800; letter-spacing:.01em; }
-.topbar .date { color:var(--accent); font-weight:800; }
+.topbar .date { color:var(--gold); font-weight:800; }
 .topbar .crumb { color:var(--muted); font-size:.8rem; }
 .topbar .right { margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
 .topbar .chipbtn { font-size:.76rem; padding:5px 12px; border-radius:99px;
@@ -169,11 +172,19 @@ main > .sub, p.sub { color:var(--muted); font-size:.78rem; margin:0 0 16px; }
 .kpi-sub { font-size:.72rem; color:var(--muted); }
 .kpi.buy .kpi-val, .kpi-val.buy { color:var(--buy); }
 .kpi.sell .kpi-val, .kpi-val.sell { color:var(--sell); }
+.kpi.gold { border-left-color:var(--gold); }
+.kpi.orange { border-left-color:var(--orange); }
+.kpi.gold .kpi-val { color:var(--gold); }
+.kpi.orange .kpi-val { color:var(--orange); }
+/* 中性 KPI 卡左框輪替暖色(買/賣卡不受影響),整排不再單一色 */
+.kpi:not(.buy):not(.sell):not(.gold):not(.orange):nth-child(3n) { border-left-color:var(--gold); }
+.kpi:not(.buy):not(.sell):not(.gold):not(.orange):nth-child(3n+2) { border-left-color:var(--orange); }
 
 /* ---------- sections / cards ---------- */
 section { margin-bottom:24px; scroll-margin-top:calc(var(--topbarh) + 10px); }
 h2 { font-size:1rem; margin:0 0 12px; display:flex; align-items:center; gap:10px; }
-h2::before { content:""; width:6px; height:18px; border-radius:3px; background:var(--accent); }
+h2::before { content:""; width:6px; height:18px; border-radius:3px;
+  background:linear-gradient(180deg,var(--accent) 45%,var(--gold)); }
 .card { background:var(--card); border:1px solid var(--line); border-radius:14px;
   padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow);
   transition:box-shadow .15s ease, transform .15s ease; }
@@ -188,6 +199,8 @@ h2::before { content:""; width:6px; height:18px; border-radius:3px; background:v
 .muted { color:var(--muted); }
 .up { color:var(--buy); font-weight:600; }
 .down { color:var(--sell); font-weight:600; }
+.gold { color:var(--gold); font-weight:600; }
+.orange { color:var(--orange); font-weight:600; }
 
 /* ---------- pills / chips / tags ---------- */
 .tag { font-size:.7rem; padding:1px 9px; border-radius:99px; vertical-align:2px; font-weight:700; }
@@ -199,11 +212,15 @@ h2::before { content:""; width:6px; height:18px; border-radius:3px; background:v
 .pill.sell { background:var(--sellbg); color:var(--sell); }
 .pill.warn { background:var(--warnbg); color:var(--warn); }
 .pill.info { background:var(--infobg); color:var(--info); }
+.pill.gold { background:var(--goldbg); color:var(--gold); }
+.pill.orange { background:var(--orangebg); color:var(--orange); }
 .pill.muted, .pill.mutedp { background:color-mix(in srgb,var(--line) 60%,transparent); color:var(--muted); }
 .chip { display:inline-block; font-size:.7rem; background:var(--infobg); color:var(--info);
   border-radius:99px; padding:1px 8px; margin:2px 4px 0 0; font-weight:600; }
 .chip.buy { background:var(--buybg); color:var(--buy); }
 .chip.sell { background:var(--sellbg); color:var(--sell); }
+.chip.gold { background:var(--goldbg); color:var(--gold); }
+.chip.orange { background:var(--orangebg); color:var(--orange); }
 
 /* ---------- bars ---------- */
 .bar-list { display:flex; flex-direction:column; gap:9px; }
