@@ -685,7 +685,10 @@ function render() {
   const m = selM.value, co = selC.value, sid = selS.value;
   document.querySelector(".topbar .date").textContent = m.slice(0,4) + "/" + m.slice(4);
   const rows = DATA.rows.filter(r => r[M] === m);
-  kpis(rows);
+  // KPI 跟著目前篩選走:固定公司/股票時顯示該範圍的數字,
+  // 不再永遠顯示全體(使用者曾因此以為正查沒生效)
+  kpis(sid ? rows.filter(r => r[SID] === sid)
+           : co ? rows.filter(r => r[CO] === co) : rows);
   if (sid) return renderStock(rows, sid);
   renderCompany(rows, co);
 }
